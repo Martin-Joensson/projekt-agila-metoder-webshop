@@ -1,1 +1,1 @@
-"# projekt-agila-metoder-startkod"  git init git add README.md git commit -m "first commit" git branch -M main git remote add origin https://github.com/Lexicon-Utbildning-Front-end-2026/projekt-agila-metoder-startkod.git git push -u origin main
+Projekt agila metoder startkod
