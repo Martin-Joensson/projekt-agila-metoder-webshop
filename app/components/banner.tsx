@@ -7,8 +7,8 @@ export default function Banner(){
             </div>
             <button>
                 <div className="px-4 border-2 border-amber-100 ">
-                    <span className="material-symbols align-middle">add</span>
-                    Test
+                    <span className="material-symbols flex flex-col">add</span>
+                    <p>Test</p>
                 </div>
             </button>
         </section>
