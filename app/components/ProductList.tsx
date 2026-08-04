@@ -1,14 +1,21 @@
+"use client"
+
 import type { Product } from "@/types"
 interface ProductListProps {
     products: Product[]
 }
 export default function ProductList({ products }: ProductListProps) {
     return (
-        <section className="w-full rounded border p-4">
+        <section className="w-full rounded border p-4 flex flex-col gap-2">
             <h1 className="text-xl">Products</h1>
-            <p>List of products cards component will go in here but in the meantime...</p>
-            <ul>
-                <li>{products.map((product) => <h2 key={product.id}>{product.title} - {product.category?.name}</h2>)}</li>
+            <p>List of products cards component will go in here but in the meantime making a quick inline one</p>
+            <ul className="flex flex-col gap-4">
+                {products.map((product) =>
+                    <li key={product.id} className="flex flex-1 justify-between">
+                        <div>{product.title}</div>
+                        <div>{product.category?.name}</div>
+                    </li>
+                )}
             </ul>
         </section>)
 }
