@@ -17,7 +17,7 @@ export default async function Home() {
   console.log(products);
 
   return (
-    <main className="max-w-7xl w-full mx-auto">
+    <main className="max-w-7xl w-full mx-auto p-4">
       <ProductList products={products} />
     </main>
   );

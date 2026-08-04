@@ -4,7 +4,7 @@ interface ProductListProps {
 }
 export default function ProductList({ products }: ProductListProps) {
     return (
-        <section className="w-full rounded border">
+        <section className="w-full rounded border p-4">
             <h1 className="text-xl">Products</h1>
             <p>List of products cards component will go in here but in the meantime...</p>
             <ul>
