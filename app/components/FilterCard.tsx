@@ -5,7 +5,7 @@ type FilterCardProps = {
 
 export const FilterCard = ({
   category = "products",
-  value = 300,
+  value = 0,
 }: FilterCardProps) => {
   const categoryConfig = {
     products: {
