@@ -36,7 +36,7 @@ export const FilterCard = ({
 
   return (
     <div className="bg-gray-100 flex-1 flex flex-col p-4 rounded-lg">
-      <p className="text-gray-500">{config.label.toUpperCase()}</p>
+      <p className="text-gray-500 text-xs">{config.label.toUpperCase()}</p>
       <div className={`flex justify-between items-center ${config.color}`}>
         <p className="text-2xl font-bold">{value}</p>
         <span className="material-symbols material-symbols-filled text-[30px]">{config.icon}</span>

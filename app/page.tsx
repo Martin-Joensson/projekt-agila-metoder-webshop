@@ -20,7 +20,7 @@ export default async function Home() {
   return (
     <main className="max-w-7xl w-full mx-auto">
       <h1>Products</h1>
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <FilterCard category="products" value={1203} />
         <FilterCard category="instock" value={123} />
         <FilterCard category="lowstock" value={33} />
