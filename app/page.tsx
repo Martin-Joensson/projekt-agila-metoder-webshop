@@ -18,6 +18,8 @@ export default async function Home() {
 
   return (
     <main className="max-w-7xl w-full mx-auto">
+
+      <Banner/>
       <h1>Products</h1>
       <div>{products.map((product) => <h2 key={product.id}>{product.title} - {product.category?.name}</h2>)}</div>
     </main>

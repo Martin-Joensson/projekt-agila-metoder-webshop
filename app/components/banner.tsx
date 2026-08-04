@@ -1,16 +1,18 @@
 export default function Banner(){
     return(
-        <section className="flex justify-between py-4">
-            <div>
-                <h2 className="text-xl font-bold">Inventory Management</h2>
-                <p>Manage and track your global product catalogue across all categories</p>
-            </div>
-            <button>
-                <div className="px-4 border-2 border-amber-100 ">
-                    <span className="material-symbols flex flex-col">add</span>
-                    <p>Test</p>
+        <section className=" bg-white border-b border-gray-400">
+            <div className="max-w-7xl w-full mx-auto flex justify-between py-4">
+                <div className="">
+                    <h2 className="text-xl font-bold text-black">Inventory Management</h2>
+                    <p className="text-gray-400">Manage and track your global product catalogue across all categories</p>
                 </div>
-            </button>
+                <button className="bg-purple-600 rounded-xl">
+                    <div className="px-4 flex items-center gap-2 ">
+                        <span className="material-symbols text-xl font-bold">add</span>
+                        <p className="">Add Product</p>
+                    </div>
+                </button>
+            </div>
         </section>
     );
 }
