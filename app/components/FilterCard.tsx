@@ -35,7 +35,7 @@ export const FilterCard = ({
     categoryConfig.products;
 
   return (
-    <div className="bg-gray-100 flex flex-col p-4 rounded-lg">
+    <div className="bg-gray-100 flex-1 flex flex-col p-4 rounded-lg">
       <p className="text-gray-500">{config.label.toUpperCase()}</p>
       <div className={`flex justify-between items-center ${config.color}`}>
         <p className="text-2xl font-bold">{value}</p>
