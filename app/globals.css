@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #d1d5dc;
   --foreground: #171717;
 }
 
@@ -13,12 +13,14 @@
   --font-mono: var(--font-geist-mono);
 }
 
+/* Commented out dark mode support for now
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
+  */
 
 body {
   background: var(--background);
