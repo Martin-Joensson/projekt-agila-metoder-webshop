@@ -1,4 +1,5 @@
 import Banner from "./components/banner";
+import { FilterCard } from "./components/FilterCard";
 import type { ProductsResponse } from "./types";
 
 const API_URL = "http://localhost:4000";
@@ -19,7 +20,19 @@ export default async function Home() {
   return (
     <main className="max-w-7xl w-full mx-auto">
       <h1>Products</h1>
-      <div>{products.map((product) => <h2 key={product.id}>{product.title} - {product.category?.name}</h2>)}</div>
+      <div className="flex flex-col sm:flex-row gap-2">
+        <FilterCard category="products" value={1203} />
+        <FilterCard category="instock" value={123} />
+        <FilterCard category="lowstock" value={33} />
+        <FilterCard category="outofstock" value={3} />
+      </div>
+      <div>
+        {products.map((product) => (
+          <h2 key={product.id}>
+            {product.title} - {product.category?.name}
+          </h2>
+        ))}
+      </div>
     </main>
   );
 }
