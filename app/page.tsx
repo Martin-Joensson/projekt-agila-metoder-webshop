@@ -26,7 +26,7 @@ export default async function Home() {
             sku={product.sku}
             thumbnail={product.thumbnail}
             brand={product.brand}
-            category={product.category?.name}
+            category={product.category}
             availabilityStatus={product.availabilityStatus}
             stock={product.stock}
             price={product.price}

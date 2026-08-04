@@ -1,13 +1,16 @@
-interface ProductCardProps {
-  title: string;
-  sku: string;
-  thumbnail: string;
-  brand: string;
-  category: string;
-  availabilityStatus: string;
-  stock: number;
-  price: number;
-}
+import type { Product } from "@/app/types";
+
+type ProductCardProps = Pick<
+  Product,
+  | "title"
+  | "sku"
+  | "thumbnail"
+  | "brand"
+  | "category"
+  | "availabilityStatus"
+  | "stock"
+  | "price"
+>;
 
 export default function ProductCard({
   title,
@@ -29,7 +32,7 @@ export default function ProductCard({
         <img src={thumbnail} alt="" className="order-first" />
       </div>
       <p>{brand}</p>
-      <p>{category}</p>
+      <p>{category?.name}</p>
       <p>{`${availabilityStatus} (${stock})`}</p>
       <p>{euros.format(price)}</p>
     </article>
