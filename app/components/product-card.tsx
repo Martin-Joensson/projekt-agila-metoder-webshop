@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 interface ProductCardProps {
   title: string;
   sku: string;
@@ -22,10 +20,14 @@ export default function ProductCard({
   price,
 }: ProductCardProps) {
   return (
-    <article>
-      <h2>{title}</h2>
-      <p>{`SKU: ${sku}`}</p>
-      <Image src={thumbnail} alt="" />
+    <article className="grid grid-cols-6">
+      <div className="grid grid-cols-2">
+        <div>
+          <h2>{title}</h2>
+          <p>{`SKU: ${sku}`}</p>
+        </div>
+        <img src={thumbnail} alt="" className="order-first" />
+      </div>
       <p>{brand}</p>
       <p>{category}</p>
       <p>{`${availabilityStatus} (${stock})`}</p>
