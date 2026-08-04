@@ -6,7 +6,7 @@ interface ProductListProps {
 }
 export default function ProductList({ products }: ProductListProps) {
     return (
-        <section className="w-full rounded border p-4 flex flex-col gap-2">
+        <section className="rounded border p-4 flex flex-col flex-1 gap-2">
             <h1 className="text-xl">Products</h1>
             <p>List of products cards component will go in here but in the meantime making a quick inline one</p>
             <ul className="flex flex-col gap-4">
