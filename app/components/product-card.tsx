@@ -52,11 +52,17 @@ export default function ProductCard({
         (<span>{stock}</span>)
       </p>
       <p className="text-right font-semibold">{euros.format(price)}</p>
-      <div className="text-right">
-        <button type="button" className="material-symbols">
+      <div className="flex justify-end gap-1 text-2xl">
+        <button
+          type="button"
+          className="material-symbols p-1 rounded-lg hover:outline-2"
+        >
           delete
         </button>
-        <button type="button" className="material-symbols">
+        <button
+          type="button"
+          className="material-symbols p-1 rounded-lg hover:outline-2"
+        >
           edit
         </button>
       </div>
