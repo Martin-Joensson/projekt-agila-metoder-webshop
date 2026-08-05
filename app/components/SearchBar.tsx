@@ -8,16 +8,33 @@ export const SearchBar = () => {
 
       <div className="flex flex-1 gap-4">
         {/* Filter on category */}
-        <select className="flex-1 p-2 border border-gray-300 rounded-md">
+        <label htmlFor="category-filter" className="sr-only">
+          {" "}
+          Filter by category:
+        </label>
+        <select
+          id="category-filter"
+          className="flex-1 p-2 border border-gray-300 rounded-md"
+        >
           <option>All categories</option>
         </select>
 
         {/* Filter on stock */}
-        <select className="flex-1 p-2 border border-gray-300  rounded-md">
+        <label htmlFor="stock-filter" className="sr-only">
+          {" "}
+          Filter by category:
+        </label>
+        <select
+          id="stock-filter"
+          className="flex-1 p-2 border border-gray-300  rounded-md"
+        >
           <option>All Stock</option>
         </select>
 
-        <button type="submit" className="flex items-center gap-1 p-2 border border-gray-300  rounded-md hover:bg-gray-200 active:bg-gray-300 active:translate-y-px">
+        <button
+          type="submit"
+          className="flex items-center gap-1 p-2 border border-gray-300  rounded-md hover:bg-gray-200 active:bg-gray-300 active:translate-y-px"
+        >
           <span className="material-symbols material-symbols-filled ">
             Filter_alt
           </span>
