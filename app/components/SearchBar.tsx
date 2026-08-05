@@ -14,7 +14,7 @@ export const SearchBar = () => {
         </label>
         <select
           id="category-filter"
-          className="flex-1 p-2 border border-gray-300 rounded-md"
+          className="flex-1 p-2 border border-gray-300 hover:bg-gray-200 active:bg-gray-300 rounded-md"
         >
           <option>All categories</option>
         </select>
@@ -26,7 +26,7 @@ export const SearchBar = () => {
         </label>
         <select
           id="stock-filter"
-          className="flex-1 p-2 border border-gray-300  rounded-md"
+          className="flex-1 p-2 border border-gray-300  hover:bg-gray-200 active:bg-gray-300 rounded-md"
         >
           <option>All Stock</option>
         </select>
