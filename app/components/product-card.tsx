@@ -30,7 +30,6 @@ export default function ProductCard({
         ? "text-orange-500"
         : "text-red-500";
 
-  console.log(availabilityColor);
   return (
     <article className="grid grid-cols-1 md:grid-cols-[5fr_2fr_2fr_2fr_2fr_1fr] items-center gap-x-4 p-4 | bg-white border-bs border-gray-300">
       <div className="grid grid-cols-[4rem_7fr] items-center gap-x-4">
