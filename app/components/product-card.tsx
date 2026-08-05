@@ -1,4 +1,5 @@
-import type { Product } from "@/app/types";
+import type { Product } from "@/types";
+import Image from "next/image";
 
 type ProductCardProps = Pick<
   Product,
@@ -37,9 +38,11 @@ export default function ProductCard({
           <h2 className="font-bold">{title}</h2>
           <p className="text-sm text-gray-500">{`SKU: ${sku}`}</p>
         </div>
-        <img
+        <Image
           src={thumbnail}
           alt=""
+          width={300}
+          height={300}
           className="order-first m-2 border border-gray-300 rounded-sm"
         />
       </div>
