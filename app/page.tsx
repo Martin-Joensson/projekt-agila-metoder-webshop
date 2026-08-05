@@ -1,5 +1,6 @@
 import Banner from "./components/banner";
 import { FilterCard } from "./components/FilterCard";
+import { SearchBar } from "./components/SearchBar";
 import type { ProductsResponse } from "./types";
 
 const API_URL = "http://localhost:4000";
@@ -26,6 +27,7 @@ export default async function Home() {
         <FilterCard category="lowstock" value={33} />
         <FilterCard category="outofstock" value={3} />
       </div>
+      <SearchBar />
       <div>
         {products.map((product) => (
           <h2 key={product.id}>
