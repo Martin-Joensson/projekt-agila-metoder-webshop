@@ -1,3 +1,5 @@
+import Banner from "./components/banner";
+import { FilterCard } from "./components/FilterCard";
 import type { ProductsResponse } from "./types";
 import ProductCard from "./components/product-card";
 
@@ -16,8 +18,16 @@ export default async function Home() {
   console.log(products);
 
   return (
-    <main>
+    <main className="max-w-7xl w-full mx-auto">
       <h1>Products</h1>
+
+      <div className="flex flex-col sm:flex-row gap-2">
+        <FilterCard category="products" value={1203} />
+        <FilterCard category="instock" value={123} />
+        <FilterCard category="lowstock" value={33} />
+        <FilterCard category="outofstock" value={3} />
+      </div>
+
       <div>
         {products.map((product) => (
           <ProductCard
