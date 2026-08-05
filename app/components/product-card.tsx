@@ -47,7 +47,7 @@ export default function ProductCard({
   );
 }
 
-const euros = new Intl.NumberFormat("se-SE", {
+const euros = new Intl.NumberFormat("en-UK", {
   style: "currency",
   currency: "EUR",
 });
