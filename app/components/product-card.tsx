@@ -22,19 +22,36 @@ export default function ProductCard({
   stock,
   price,
 }: ProductCardProps) {
+  const availabilityColor: string =
+    availabilityStatus === "In Stock"
+      ? "text-green-500"
+      : availabilityStatus === "Low Stock"
+        ? "text-orange-500"
+        : "text-red-500";
+
+  console.log(availabilityColor);
   return (
-    <article className="grid grid-cols-1 md:grid-cols-[5fr_2fr_2fr_2fr_2fr_1fr] items-center gap-x-4 p-4 border-bs">
+    <article className="grid grid-cols-1 md:grid-cols-[5fr_2fr_2fr_2fr_2fr_1fr] items-center gap-x-4 p-4 | bg-white border-bs border-gray-300">
       <div className="grid grid-cols-[4rem_7fr] items-center gap-x-4">
         <div>
-          <h2>{title}</h2>
-          <p className="text-sm">{`SKU: ${sku}`}</p>
+          <h2 className="font-bold">{title}</h2>
+          <p className="text-sm text-gray-500">{`SKU: ${sku}`}</p>
         </div>
-        <img src={thumbnail} alt="" className="order-first m-2 border" />
+        <img
+          src={thumbnail}
+          alt=""
+          className="order-first m-2 border border-gray-300 rounded-sm"
+        />
       </div>
       <p>{brand}</p>
       <p>{category?.name}</p>
-      <p className="text-right">{`${availabilityStatus} (${stock})`}</p>
-      <p className="text-right">{euros.format(price)}</p>
+      <p className="text-right">
+        <span className={`font-semibold ${availabilityColor}`}>
+          {availabilityStatus}
+        </span>{" "}
+        (<span>{stock}</span>)
+      </p>
+      <p className="text-right font-semibold">{euros.format(price)}</p>
       <div className="text-right">
         <button type="button" className="material-symbols">
           delete
