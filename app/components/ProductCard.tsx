@@ -31,7 +31,7 @@ export default function ProductCard({
         : "text-red-500";
 
   return (
-    <article className="grid grid-cols-1 md:grid-cols-[5fr_2fr_2fr_2fr_2fr_1fr] items-center gap-x-4 p-4 | bg-white border-bs border-gray-300">
+    <article className="product-table-grid | bg-white border-bs border-gray-200">
       <div className="grid grid-cols-[4rem_7fr] items-center gap-x-4">
         <div>
           <h2 className="font-bold">{title}</h2>
