@@ -33,6 +33,7 @@ body {
   }
 }
 
+
 @layer components {
   .material-symbols {
     font-family: var(--font-material-symbols);
