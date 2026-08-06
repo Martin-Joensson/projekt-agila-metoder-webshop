@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import localFont from "next/font/local"
+import localFont from "next/font/local";
 import "./globals.css";
 import Banner from "./components/Banner";
 
@@ -15,10 +15,10 @@ const geistMono = Geist_Mono({
 });
 
 const materialSymbols = localFont({
- src:"../fonts/material-symbols-rounded.woff2",
- weight: "100 900",
- variable: "--font-material-symbols"
-})
+  src: "../fonts/material-symbols-rounded.woff2",
+  weight: "100 900",
+  variable: "--font-material-symbols",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
