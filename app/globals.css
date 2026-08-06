@@ -28,6 +28,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
 @layer components {
   .material-symbols {
     font-family: var(--font-material-symbols);

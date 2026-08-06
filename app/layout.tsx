@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local"
 import "./globals.css";
-import Banner from "./components/banner";
+import Banner from "./components/Banner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,8 +19,6 @@ const materialSymbols = localFont({
  weight: "100 900",
  variable: "--font-material-symbols"
 })
-
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
