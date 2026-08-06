@@ -6,12 +6,12 @@ interface ProductListProps {
 }
 export default function ProductList({ products }: ProductListProps) {
   return (
-    <section className="bg-gray-100 rounded-lg border-gray-300 border">
+    <section className="bg-neutral-50 rounded-lg border-gray-300 border">
       <ul>
         <div className="product-table-grid font-semibold text-gray-500 text-sm mx-4 py-4">
           <p>Title</p>
           <p>Brand</p>
-          <p>Category</p>
+          <p className="text-center">Category</p>
           <p>Stock</p>
           <p>Price</p>
           <p>Actions</p>
