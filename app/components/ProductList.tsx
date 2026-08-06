@@ -1,21 +1,37 @@
-"use client"
-
-import type { Product } from "@/types"
+"use client";
+import ProductCard from "./product-card";
+import type { Product } from "@/types";
 interface ProductListProps {
-    products: Product[]
+  products: Product[];
 }
 export default function ProductList({ products }: ProductListProps) {
-    return (
-        <section className="rounded border p-4 flex flex-col flex-1 gap-2">
-            <h1 className="text-xl">Products</h1>
-            <p>List of products cards component will go in here but in the meantime making a quick inline one</p>
-            <ul className="flex flex-col gap-4">
-                {products.map((product) =>
-                    <li key={product.id} className="flex flex-1 justify-between">
-                        <div>{product.title}</div>
-                        <div>{product.category?.name}</div>
-                    </li>
-                )}
-            </ul>
-        </section>)
+  return (
+    <section className="bg-gray-100 rounded-lg border-gray-300 border">
+      <ul>
+        <div className="product-table-grid font-semibold text-gray-500 text-sm mx-4 py-4">
+          <p>Title</p>
+          <p>Brand</p>
+          <p>Category</p>
+          <p>Stock</p>
+          <p>Price</p>
+          <p>Actions</p>
+        </div>
+        {products.map((product) => (
+          <li key={product.id} className="flex flex-col rounded">
+            <ProductCard
+              key={product.id}
+              title={product.title}
+              sku={product.sku}
+              thumbnail={product.thumbnail}
+              brand={product.brand}
+              category={product.category}
+              availabilityStatus={product.availabilityStatus}
+              stock={product.stock}
+              price={product.price}
+            />
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
 }

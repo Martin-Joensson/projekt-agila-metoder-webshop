@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #d1d5dc;
+  --background: #e5e7eb;
   --foreground: #171717;
 }
 
@@ -26,6 +26,11 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+@layer components {
+  .product-table-grid {
+    @apply grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,2fr)_minmax(0,2fr)_minmax(0,2fr)_minmax(0,2fr)_minmax(0,1fr)] items-center gap-x-4;
+  }
 }
 
 @layer components {
