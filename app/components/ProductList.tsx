@@ -11,7 +11,7 @@ export const ProductList = ({ products }: ProductListProps) => {
         <div className="product-table-grid font-semibold text-gray-500 text-sm mx-4 py-4">
           <p>Title</p>
           <p>Brand</p>
-          <p className="text-center">Category</p>
+          <p>Category</p>
           <p>Stock</p>
           <p>Price</p>
           <p>Actions</p>
