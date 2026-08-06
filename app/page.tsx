@@ -1,4 +1,3 @@
-import Banner from "./components/banner";
 import type { ProductsResponse } from "./types";
 
 const API_URL = "http://localhost:4000";
