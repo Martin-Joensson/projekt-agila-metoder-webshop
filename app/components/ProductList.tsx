@@ -8,13 +8,13 @@ export const ProductList = ({ products }: ProductListProps) => {
   return (
     <section className="rounded-lg border-gray-300 border overflow-hidden">
       <ul className="bg-neutral-50">
-        <div className="product-table-grid font-semibold text-neutral-500 text-sm">
+        <div className="product-table-grid font-semibold text-neutral-500 text-sm py-4">
           <p className="text-left">Title</p>
           <p className="text-left">Brand</p>
           <p className="text-left">Category</p>
           <p className="text-right">Stock</p>
           <p className="text-right">Price</p>
-          <p className="text-right">Actions</p>
+          <p className="text-center">Actions</p>
         </div>
         {products.map((product) => (
           <li
