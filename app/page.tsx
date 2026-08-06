@@ -1,4 +1,5 @@
 import { FilterCard } from "./components/FilterCard";
+import { SearchBar } from "./components/SearchBar";
 import type { ProductsResponse } from "./types";
 import ProductList from "@/components/ProductList";
 
