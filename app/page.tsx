@@ -1,8 +1,7 @@
-import Banner from "./components/banner";
 import { FilterCard } from "./components/FilterCard";
 import { SearchBar } from "./components/SearchBar";
 import type { ProductsResponse } from "./types";
-import ProductCard from "@/components/ProductCard.tsx";
+import ProductCard from "@/components/ProductCard";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
