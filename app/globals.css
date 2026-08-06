@@ -27,12 +27,6 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
-@layer components {
-  .product-table-grid {
-    @apply grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,2fr)_minmax(0,2fr)_minmax(0,2fr)_minmax(0,2fr)_minmax(0,1fr)] items-center gap-x-4;
-  }
-}
-
 
 @layer components {
   .material-symbols {
@@ -57,4 +51,9 @@ body {
       "GRAD" 0,
       "opsz" 40;
   }
+
+  .product-table-grid {
+    @apply grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,2fr)_minmax(0,2fr)_minmax(0,2fr)_minmax(0,2fr)_minmax(0,1fr)] items-center gap-x-4;
+  }
+
 }
