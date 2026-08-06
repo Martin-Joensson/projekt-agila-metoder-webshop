@@ -1,4 +1,9 @@
+
+import Banner from "./components/banner";
+import { FilterCard } from "./components/FilterCard";
+import { SearchBar } from "./components/SearchBar";
 import type { ProductsResponse } from "./types";
+import ProductCard from "@/components/ProductCard.tsx";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
@@ -12,13 +17,34 @@ export default async function Home() {
     `${API_URL}/products/?_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category`,
   ).then((res) => res.json());
 
-
   console.log(products);
 
   return (
     <main className="max-w-7xl w-full mx-auto">
       <h1>Products</h1>
-      <div>{products.map((product) => <h2 key={product.id}>{product.title} - {product.category?.name}</h2>)}</div>
+
+      <div className="flex flex-col sm:flex-row gap-2">
+        <FilterCard category="products" value={1203} />
+        <FilterCard category="instock" value={123} />
+        <FilterCard category="lowstock" value={33} />
+        <FilterCard category="outofstock" value={3} />
+      </div>
+      <SearchBar />
+      <div>
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            title={product.title}
+            sku={product.sku}
+            thumbnail={product.thumbnail}
+            brand={product.brand}
+            category={product.category}
+            availabilityStatus={product.availabilityStatus}
+            stock={product.stock}
+            price={product.price}
+          />
+        ))}
+      </div>
     </main>
   );
 }
