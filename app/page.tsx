@@ -1,6 +1,7 @@
 import { FilterCard } from "./components/FilterCard";
 import type { ProductsResponse } from "./types";
-import ProductList from "@/components/ProductList";
+import { ProductList } from "@/components/ProductList";
+import { SearchBar } from "./components/SearchBar";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
@@ -24,6 +25,7 @@ export default async function Home() {
         <FilterCard category="lowstock" value={33} />
         <FilterCard category="outofstock" value={3} />
       </div>
+      <SearchBar />
       <ProductList products={products} />
     </main>
   );

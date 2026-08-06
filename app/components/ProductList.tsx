@@ -4,7 +4,7 @@ import type { Product } from "@/types";
 interface ProductListProps {
   products: Product[];
 }
-export default function ProductList({ products }: ProductListProps) {
+export const ProductList = ({ products }: ProductListProps) => {
   return (
     <section className="bg-neutral-50 rounded-lg border-gray-300 border">
       <ul>
@@ -34,4 +34,4 @@ export default function ProductList({ products }: ProductListProps) {
       </ul>
     </section>
   );
-}
+};
