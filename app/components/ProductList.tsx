@@ -6,18 +6,21 @@ interface ProductListProps {
 }
 export const ProductList = ({ products }: ProductListProps) => {
   return (
-    <section className="bg-neutral-50 rounded-lg border-gray-300 border">
-      <ul>
-        <div className="product-table-grid font-semibold text-neutral-500 text-sm mx-4 py-4">
-          <p>Title</p>
-          <p>Brand</p>
-          <p>Category</p>
-          <p>Stock</p>
-          <p>Price</p>
-          <p>Actions</p>
+    <section className="rounded-lg border-gray-300 border overflow-hidden">
+      <ul className="bg-neutral-50">
+        <div className="product-table-grid font-semibold text-neutral-500 text-sm">
+          <p className="text-left">Title</p>
+          <p className="text-left">Brand</p>
+          <p className="text-left">Category</p>
+          <p className="text-right">Stock</p>
+          <p className="text-right">Price</p>
+          <p className="text-right">Actions</p>
         </div>
         {products.map((product) => (
-          <li key={product.id} className="flex flex-col rounded">
+          <li
+            key={product.id}
+            className="flex flex-col bg-white border-bs border-gray-200"
+          >
             <ProductCard
               key={product.id}
               title={product.title}
