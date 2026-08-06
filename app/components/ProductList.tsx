@@ -1,5 +1,5 @@
 "use client";
-import ProductCard from "./product-card";
+import ProductCard from "./ProductCard";
 import type { Product } from "@/types";
 interface ProductListProps {
   products: Product[];
