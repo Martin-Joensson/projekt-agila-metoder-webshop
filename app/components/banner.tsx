@@ -1,6 +1,6 @@
 export default function Banner(){
     return(
-        <header className=" bg-white border-b border-gray-400">
+        <header className=" bg-white border-b border-gray-300">
             <div className="max-w-7xl w-full mx-auto flex justify-between py-4">
                 <div>
                     <h1 className="text-xl font-bold text-black">Inventory Management</h1>
