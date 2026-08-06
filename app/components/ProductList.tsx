@@ -8,7 +8,7 @@ export const ProductList = ({ products }: ProductListProps) => {
   return (
     <section className="bg-neutral-50 rounded-lg border-gray-300 border">
       <ul>
-        <div className="product-table-grid font-semibold text-gray-500 text-sm mx-4 py-4">
+        <div className="product-table-grid font-semibold text-neutral-500 text-sm mx-4 py-4">
           <p>Title</p>
           <p>Brand</p>
           <p>Category</p>
