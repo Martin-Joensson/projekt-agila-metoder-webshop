@@ -1,5 +1,6 @@
 import Banner from "./components/banner";
 import { FilterCard } from "./components/FilterCard";
+import { SearchBar } from "./components/SearchBar";
 import type { ProductsResponse } from "./types";
 import ProductCard from "@/components/ProductCard.tsx";
 
@@ -27,7 +28,7 @@ export default async function Home() {
         <FilterCard category="lowstock" value={33} />
         <FilterCard category="outofstock" value={3} />
       </div>
-
+      <SearchBar />
       <div>
         {products.map((product) => (
           <ProductCard
