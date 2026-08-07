@@ -31,7 +31,7 @@ export default function ProductCard({
         : "text-red-500";
 
   return (
-    <article className="product-table-grid | bg-white border-bs border-gray-200">
+    <article className="product-table-grid | bg-white">
       <div className="grid grid-cols-[4rem_7fr] items-center gap-x-4">
         <div>
           <h2 className="font-bold">{title}</h2>
@@ -42,11 +42,11 @@ export default function ProductCard({
           alt=""
           width={300}
           height={300}
-          className="order-first m-2 border border-gray-300 rounded-sm"
+          className="order-first my-2 border border-gray-300 rounded-sm"
         />
       </div>
-      <p>{brand}</p>
-      <p>{category?.name}</p>
+      <p className="text-left">{brand}</p>
+      <p className="text-left">{category?.name}</p>
       <p className="text-right">
         <span className={`font-semibold ${availabilityColor}`}>
           {availabilityStatus}
@@ -54,7 +54,7 @@ export default function ProductCard({
         (<span>{stock}</span>)
       </p>
       <p className="text-right font-semibold">{euros.format(price)}</p>
-      <div className="flex justify-end gap-1 text-2xl">
+      <div className="flex justify-end text-2xl gap-2">
         <button
           type="button"
           className="material-symbols p-1 rounded-lg hover:outline-2"
