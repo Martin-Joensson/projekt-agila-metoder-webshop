@@ -1,15 +1,9 @@
+import { ProductsResponse } from "@/types";
 import Link from "next/link";
 
-interface PaginationProps {
-  page: number;
-  pages: number;
-  total: number;
-  limit: number;
-}
+type PaginationProps = Omit<ProductsResponse, "products">;
 
 export const Pagination = ({ page, pages, total, limit }: PaginationProps) => {
-  console.log(total, page, pages, limit);
-
   const visiblePages = [];
 
   const start = Math.max(1, page - 2);
@@ -23,12 +17,15 @@ export const Pagination = ({ page, pages, total, limit }: PaginationProps) => {
     "w-12 h-12 rounded border border-gray-300 font-bold hover:bg-neutral-500 hover:text-white";
 
   return (
-    <div className="bg-neutral-50 py-4 flex gap-2 text-neutral-500 justify-center items-center">
-      <button className={`${buttonStyle} bg-white`}>
+    <nav className="bg-neutral-50 py-4 flex gap-2 text-neutral-500 justify-center items-center">
+      <Link
+        href={`?page=${page - 1}`}
+        className={`${buttonStyle} flex items-center justify-center `}
+      >
         <span className="material-symbols material-symbols-filled text-3xl">
           chevron_left
         </span>
-      </button>
+      </Link>
 
       <div className="flex justify-center gap-2">
         {visiblePages.map((pageNr) => (
@@ -58,11 +55,14 @@ export const Pagination = ({ page, pages, total, limit }: PaginationProps) => {
           </Link>
         )}
       </div>
-      <button className={`${buttonStyle} bg-white`}>
+      <Link
+        href={`?page=${page + 1}`}
+        className={`${buttonStyle} flex items-center justify-center `}
+      >
         <span className="material-symbols material-symbols-filled text-3xl">
           chevron_right
         </span>
-      </button>
-    </div>
+      </Link>
+    </nav>
   );
 };
