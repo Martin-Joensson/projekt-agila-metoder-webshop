@@ -1,14 +1,9 @@
 "use client";
 import { Pagination } from "./Pagination";
 import ProductCard from "./ProductCard";
-import type { Product } from "@/types";
-interface ProductListProps {
-  products: Product[];
-  page: number;
-  pages: number;
-  total: number;
-  limit: number;
-}
+import type { ProductsResponse } from "@/types";
+type ProductListProps = ProductsResponse;
+
 export const ProductList = ({ products, pages, page, total, limit }: ProductListProps) => {
   return (
     <section className="rounded-lg border-gray-300 border overflow-hidden">
