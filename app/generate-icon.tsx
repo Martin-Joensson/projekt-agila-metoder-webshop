@@ -1,5 +1,7 @@
-import { ImageResponse } from "next/og";
+// Copied from https://nextjs.org/docs/app/api-reference/file-conventions/metadata/app-icons#generate-icons-using-code-js-ts-tsx
+// To use as app icon, change filename to icon.tsx
 
+import { ImageResponse } from "next/og";
 // Image metadata
 export const size = {
   width: 32,
@@ -21,6 +23,7 @@ export default function Icon() {
         alignItems: "center",
         justifyContent: "center",
         color: "white",
+        borderRadius: "50%",
       }}
     >
       A
