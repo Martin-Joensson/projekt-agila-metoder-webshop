@@ -35,11 +35,11 @@ export const FilterCard = ({
     categoryConfig.products;
 
   return (
-    <div className="bg-gray-100 flex-1 flex flex-col p-4 rounded-lg">
-      <p className="text-gray-500 text-xs">{config.label.toUpperCase()}</p>
-      <div className={`flex justify-between items-center ${config.color}`}>
-        <p className="text-2xl font-bold">{value}</p>
-        <span className="material-symbols material-symbols-filled text-[30px]">{config.icon}</span>
+    <div className="bg-white flex-1 flex flex-col gap-3 p-4 rounded-lg border border-gray-300">
+      <p className="text-gray-500 text-sm font-bold">{config.label.toUpperCase()}</p>
+      <div className={`flex justify-between items-center text-4xl ${config.color}`}>
+        <p className="font-black">{value}</p>
+        <span className="material-symbols material-symbols-filled">{config.icon}</span>
       </div>
     </div>
   );
