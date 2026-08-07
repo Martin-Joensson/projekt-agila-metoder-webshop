@@ -1,0 +1,68 @@
+import Link from "next/link";
+
+interface PaginationProps {
+  page: number;
+  pages: number;
+  total: number;
+  limit: number;
+}
+
+export const Pagination = ({ page, pages, total, limit }: PaginationProps) => {
+  console.log(total, page, pages, limit);
+
+  const visiblePages = [];
+
+  const start = Math.max(1, page - 2);
+  const end = Math.min(pages, page + 2);
+
+  for (let i = start; i <= end; i++) {
+    visiblePages.push(i);
+  }
+
+  const buttonStyle =
+    "w-12 h-12 rounded border border-gray-300 font-bold hover:bg-gray-200";
+
+  return (
+    <div className="bg-neutral-50 py-4 flex gap-2 text-neutral-500 justify-center items-center">
+      <button className={`${buttonStyle} bg-white`}>
+        <span className="material-symbols material-symbols-filled text-3xl">
+          chevron_left
+        </span>
+      </button>
+
+      <div className="flex justify-center gap-2">
+        {visiblePages.map((pageNr) => (
+          <Link
+            key={pageNr}
+            href={`?page=${pageNr}`}
+            className={`${buttonStyle} flex items-center justify-center ${
+              pageNr === page ? "bg-neutral-500 text-white" : "bg-white"
+            }`}
+          >
+            {pageNr}
+          </Link>
+        ))}
+
+        {end < pages - 1 && (
+          <span className="flex  w-8 items-center justify-center">...</span>
+        )}
+
+        {end < pages && (
+          <Link
+            href={`?page=${pages}`}
+            className={`${buttonStyle} flex items-center justify-center ${
+              page === pages ? "bg-gray-200" : "bg-white"
+            }`}
+          >
+            {pages}
+          </Link>
+        )}
+      </div>
+      <button className={`${buttonStyle} bg-white`}>
+        <span className="material-symbols material-symbols-filled text-3xl">
+          chevron_right
+        </span>
+      </button>
+    </div>
+  );
+};

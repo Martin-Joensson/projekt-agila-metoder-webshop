@@ -26,7 +26,13 @@ export default async function Home() {
         <FilterCard category="outofstock" value={3} />
       </div>
       <SearchBar />
-      <ProductList products={products} />
+      <ProductList
+        products={products}
+        page={page}
+        pages={pages}
+        total={total}
+        limit={limit}
+      />
     </main>
   );
 }
