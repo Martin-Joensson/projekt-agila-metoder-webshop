@@ -4,6 +4,17 @@ This project uses [json-server](https://github.com/typicode/json-server/tree/v0.
 
 Data in the json for the server is from [dummyjson.com](https://dummyjson.com/docs/products) but modified to fit the needs of this project. Most of the endpoints mirrors those in that documentation.
 
+## Technologies
+
+| Technology | Used for |
+|------------|----------|
+| Next.js | User interface & Server Components|
+| TypeScript | Type safety |
+| Tailwind | Styling |
+| Mock-API | Product Library  |
+| Github Project | Sprint dashboard |
+
+
 ## Getting Started
 
 First, install the dependencies:
