@@ -1,3 +1,13 @@
+<img
+  src="./app/icon.png"
+  alt="Screenshot av applikationen"
+  width="60"
+/>
+# Webshop
+
+This is a group project for the frontend education with Lexicon. The main thrust of this project is to practice developing a product using an Agile development process.
+
+---
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 This project uses [json-server](https://github.com/typicode/json-server/tree/v0.17.4) to mock a backend API.
