@@ -104,7 +104,7 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 ## Authors
-- Gabriel Gaglianone (@Amuga)
-- Martin Jönsson (@Martin-Joensson)
-- Tomas Savela (@f0jzd)
-- Josefin Wall (@josiefinis)
+- Gabriel Gaglianone ([@Amuga](https://github.com/Amuga))
+- Martin Jönsson ([@Martin-Joensson](https://github.com/Martin-Joensson))
+- Tomas Savela ([@f0jzd](https://github.com/f0jzd))
+- Josefin Wall ([@josiefinis](https://github.com/josiefinis))
