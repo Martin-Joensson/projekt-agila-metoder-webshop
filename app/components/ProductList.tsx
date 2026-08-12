@@ -1,10 +1,23 @@
 "use client";
+import { useState } from "react";
 import { Pagination } from "./Pagination";
 import ProductCard from "./ProductCard";
-import type { ProductsResponse } from "@/types";
+import type { ProductsResponse, Product } from "@/types";
 type ProductListProps = ProductsResponse;
 
-export const ProductList = ({ products, pages, page, total, limit }: ProductListProps) => {
+export const ProductList = ({
+  products: initialProducts,
+  pages,
+  page,
+  total,
+  limit,
+}: ProductListProps) => {
+  const [products, setProducts] = useState<Product[]>(initialProducts);
+
+  const handleDeleteProduct = (sku: string) => {
+    setProducts((prev) => prev.filter((p) => p.sku !== sku));
+  };
+
   return (
     <section className="rounded-lg border-gray-300 border overflow-hidden">
       <ul className="bg-neutral-50">
@@ -31,6 +44,7 @@ export const ProductList = ({ products, pages, page, total, limit }: ProductList
               availabilityStatus={product.availabilityStatus}
               stock={product.stock}
               price={product.price}
+              onDelete={handleDeleteProduct}
             />
           </li>
         ))}
