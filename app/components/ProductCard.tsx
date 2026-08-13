@@ -4,6 +4,7 @@ import Image from "next/image";
 
 type ProductCardProps = Pick<
   Product,
+  | "id"
   | "title"
   | "sku"
   | "thumbnail"
@@ -15,6 +16,7 @@ type ProductCardProps = Pick<
 >;
 
 export default function ProductCard({
+  id,
   title,
   sku,
   thumbnail,
@@ -65,7 +67,7 @@ export default function ProductCard({
 
         <Link
           className="material-symbols p-1 rounded-lg hover:outline-2"
-          href={`/edit-product/${sku}`}
+          href={`/edit-product/${id}`}
         >
           edit
         </Link>
