@@ -46,7 +46,7 @@ export function Modal({
 
   /*createPortal is a React function that renders a component outside its normal DOM hierarchy.
    Instead of rendering as a child of the current component it renders into a different DOM node— e.g. document.body.
-   It generally avoids css related issues, and in the DOM hierarchy it should be up front not a child of something.
+   It generally avoids css related issues, and in the DOM hierarchy, it should be up front not a child of a component that uses it.
   */
   return createPortal(
     <>
