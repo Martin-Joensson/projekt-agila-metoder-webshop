@@ -1,4 +1,5 @@
 import type { Product } from "@/types";
+import Link from "next/link";
 import Image from "next/image";
 
 type ProductCardProps = Pick<
@@ -61,12 +62,13 @@ export default function ProductCard({
         >
           delete
         </button>
-        <button
-          type="button"
+
+        <Link
           className="material-symbols p-1 rounded-lg hover:outline-2"
+          href={`/edit-product/${sku}`}
         >
           edit
-        </button>
+        </Link>
       </div>
     </article>
   );
