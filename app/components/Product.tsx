@@ -1,7 +1,4 @@
-"use client";
-
 import { Product } from "@/types";
-import { FormEvent, useEffect, useState } from "react";
 
 interface Category {
   id: number;
@@ -33,89 +30,79 @@ interface ProductFormProps {
   productId?: number;
 }
 
-export default function ProductPage({ productId }: ProductFormProps) {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [formData, setFormData] = useState<Product>(emptyProduct);
+// export default function ProductPage({ productId }: ProductFormProps) {
+//   const [categories, setCategories] = useState<Category[]>([]);
+//   const [formData, setFormData] = useState<Product>(emptyProduct);
 
-  useEffect(() => {
-    if (!productId) return;
+//   async function getProduct(productId?: number) {
+//     if (!productId) return emptyProduct;
 
-    async function getProduct() {
-      try {
-        const response = await fetch(`${API_URL}/products/${productId}`);
+//     const response = await fetch(`${API_URL}/products/${productId}`);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch product");
-        }
+//     if (!response.ok) {
+//       throw new Error("Failed to fetch product");
+//     }
 
-        const product: Product = await response.json();
+//     return response.json();
+//   }
 
-        setFormData(product);
-      } catch (error) {
-        console.error("Error fetching product:", error);
-      }
-    }
-    getProduct();
-  }, [productId]);
+//   //Fetch categories from the api thing
+//   async function getCategories() {
+//     const response = await fetch(`${API_URL}/categories`);
 
-  //Fetch categories from the api thing
-  useEffect(() => {
-    async function getCategories() {
-      try {
-        const response = await fetch("http://localhost:4000/categories");
+//     if (!response.ok) {
+//       throw new Error("Failed to fetch categories");
+//     }
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch categories");
-        }
+//     return response.json();
+//   }
 
-        const data: Category[] = await response.json();
-        setCategories(data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    }
+//   const handleChange = (
+//     e: React.ChangeEvent<
+//       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+//     >,
+//   ) => {
+//     const { name, value } = e.target;
 
-    getCategories();
-  }, []);
+//     setFormData((previous) => ({
+//       ...previous,
+//       [name]: name === "price" || name === "categoryId" ? Number(value) : value,
+//     }));
+//   };
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >,
-  ) => {
-    const { name, value } = e.target;
+//   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+//     event.preventDefault();
 
-    setFormData((previous) => ({
-      ...previous,
-      [name]: name === "price" || name === "categoryId" ? Number(value) : value,
-    }));
-  };
+//     console.log("Submitting form data:", formData);
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+//     // POST formData here
 
-    console.log("Submitting form data:", formData);
+//     setFormData(emptyProduct);
+//   };
 
-    // POST formData here
+export default async function ProductPage({
+  productId,
+}: {
+  productId?: number;
+}) {
+  const product = productId
+    ? await fetch(`${API_URL}/${productId}`).then((res) => res.json())
+    : emptyProduct;
 
-    setFormData(emptyProduct);
-  };
+  const categories = await fetch(`${API_URL}/categories`).then((res) =>
+    res.json(),
+  );
 
   return (
     <article className="flex flex-col m-auto max-w-7xl items-center">
       <h2 className="text-2xl">Add / Edit product</h2>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col gap-4 items-start max-w-2xl m-auto"
-      >
+      <form className="flex flex-col gap-4 items-start max-w-2xl m-auto">
         <div className="flex flex-col gap-1 w-full">
           <label>Product name:</label>
           <input
             type="text"
             className="border p-1 "
             name="title"
-            value={formData.title}
-            onChange={handleChange}
             placeholder="Enter product title"
             required
           />
@@ -124,8 +111,6 @@ export default function ProductPage({ productId }: ProductFormProps) {
           <label>Product description:</label>
           <textarea
             name="description"
-            value={formData.description}
-            onChange={handleChange}
             placeholder="Enter description"
             required
             className="w-full min-w-2xl min-h-8 field-sizing-content resize-none rounded border p-2"
@@ -136,8 +121,7 @@ export default function ProductPage({ productId }: ProductFormProps) {
           <input
             type="text"
             name="thumbnail"
-            value={formData.thumbnail}
-            onChange={handleChange}
+            defaultValue={product.description}
             placeholder="Enter thumbnail"
             required
             className="border p-1 rounded"
@@ -149,8 +133,7 @@ export default function ProductPage({ productId }: ProductFormProps) {
             <input
               type="number"
               name="price"
-              value={formData.price}
-              onChange={handleChange}
+              defaultValue={product.price}
               placeholder="Enter price"
               required
               className="border  h-8 p-1 rounded"
@@ -161,8 +144,7 @@ export default function ProductPage({ productId }: ProductFormProps) {
             <input
               type="text"
               name="brand"
-              value={formData.brand}
-              onChange={handleChange}
+              defaultValue={product.brand}
               placeholder="Enter brand"
               required
               className="border  h-8 p-1 rounded"
@@ -172,15 +154,14 @@ export default function ProductPage({ productId }: ProductFormProps) {
             <label>Category</label>
             <select
               name="categoryId"
-              value={formData.categoryId}
-              onChange={handleChange}
+              defaultValue={product.categoryId}
               required
               className="border h-8 rounded"
             >
               <option value={0} disabled>
                 Select a category
               </option>
-              {categories.map((category) => (
+              {categories.map((category: Category) => (
                 <option key={category.id} value={category.id}>
                   {category.name}
                 </option>
