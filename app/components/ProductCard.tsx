@@ -1,5 +1,7 @@
 import type { Product } from "@/types";
+import { Modal } from "./Modal";
 import Image from "next/image";
+import { useState } from "react";
 
 type ProductCardProps = Pick<
   Product,
@@ -33,9 +35,11 @@ export default function ProductCard({
         ? "text-orange-500"
         : "text-red-500";
 
+  const [isOpen, setIsOpen] = useState(false);
+
   const handleDeleteClick = () => {
     console.info("Deleting item: ", title);
-    onDelete(sku || "");
+    setIsOpen(true);
   };
 
   return (
@@ -77,6 +81,14 @@ export default function ProductCard({
           edit
         </button>
       </div>
+      <Modal
+        isOpen={isOpen}
+        onConfirm={() => onDelete(sku || "")}
+        onClose={() => setIsOpen(false)}
+        title="Are you sure you want to delete this item?"
+      >
+        <p>{title}</p>
+      </Modal>
     </article>
   );
 }
