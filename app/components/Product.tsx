@@ -79,7 +79,9 @@ export default function ProductPage({ productId }: ProductFormProps) {
   }, []);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
   ) => {
     const { name, value } = e.target;
 
@@ -100,75 +102,99 @@ export default function ProductPage({ productId }: ProductFormProps) {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col max-w-120 m-auto outline-2 outline-black p-4"
-    >
-      <div className="flex flex-wrap justify-center">
-        <input
-          type="text"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          placeholder="Enter product title"
-          required
-        />
-        <input
-          type="text"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          placeholder="Enter description"
-          required
-        />
-        <input
-          type="text"
-          name="thumbnail"
-          value={formData.thumbnail}
-          onChange={handleChange}
-          placeholder="Enter thumbnail"
-          required
-        />
-        <input
-          type="text"
-          name="brand"
-          value={formData.brand}
-          onChange={handleChange}
-          placeholder="Enter brand"
-          required
-        />
-        <input
-          type="number"
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-          placeholder="Enter price"
-          required
-        />
-        <select
-          name="categoryId"
-          value={formData.categoryId}
-          onChange={handleChange}
-          required
-        >
-          <option value={0} disabled>
-            Select a category
-          </option>
-
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <button
-        className="bg-amber-500 w-fit m-auto p-2 mbs-3 rounded-xl hover:bg-amber-800 ease-in duration-200 cursor-pointer"
-        type="submit"
+    <article className="flex flex-col m-auto max-w-7xl items-center">
+      <h2 className="text-2xl">Add / Edit product</h2>
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 items-start max-w-2xl m-auto"
       >
-        Submit
-      </button>
-    </form>
+        <div className="flex flex-col gap-1 w-full">
+          <label>Product name:</label>
+          <input
+            type="text"
+            className="border p-1 "
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            placeholder="Enter product title"
+            required
+          />
+        </div>
+        <div className="w-full">
+          <label>Product description:</label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            placeholder="Enter description"
+            required
+            className="w-full min-w-2xl min-h-8 field-sizing-content resize-none rounded border p-2"
+          />
+        </div>
+        <div className="flex flex-col w-full">
+          <label>Product Image:</label>
+          <input
+            type="text"
+            name="thumbnail"
+            value={formData.thumbnail}
+            onChange={handleChange}
+            placeholder="Enter thumbnail"
+            required
+            className="border p-1 rounded"
+          />
+        </div>
+        <div className="flex w-full">
+          <div className="flex flex-col">
+            <label>Price:</label>
+            <input
+              type="number"
+              name="price"
+              value={formData.price}
+              onChange={handleChange}
+              placeholder="Enter price"
+              required
+              className="border  h-8 p-1 rounded"
+            />
+          </div>
+          <div className="flex flex-col m-auto">
+            <label>Brand</label>
+            <input
+              type="text"
+              name="brand"
+              value={formData.brand}
+              onChange={handleChange}
+              placeholder="Enter brand"
+              required
+              className="border  h-8 p-1 rounded"
+            />
+          </div>
+          <div className="flex flex-col">
+            <label>Category</label>
+            <select
+              name="categoryId"
+              value={formData.categoryId}
+              onChange={handleChange}
+              required
+              className="border h-8 rounded"
+            >
+              <option value={0} disabled>
+                Select a category
+              </option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <button
+          className="bg-amber-500 w-fit m-auto p-2 mbs-3 rounded-xl hover:bg-amber-800 ease-in duration-200 cursor-pointer"
+          type="submit"
+        >
+          Submit
+        </button>
+      </form>
+    </article>
   );
 }
