@@ -23,6 +23,7 @@ export const ProductList = ({ products, pages, page, total, limit }: ProductList
           >
             <ProductCard
               key={product.id}
+              id={product.id}
               title={product.title}
               sku={product.sku}
               thumbnail={product.thumbnail}
