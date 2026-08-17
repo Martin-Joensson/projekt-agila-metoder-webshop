@@ -42,7 +42,10 @@ export const ProductForm = async ({ productId }: ProductFormProps) => {
   return (
     <article className="flex flex-col m-auto max-w-7xl items-center">
       <h2 className="text-2xl">Add / Edit product</h2>
-      <form className="flex flex-col gap-4 items-start max-w-2xl m-auto">
+      <form
+        key={product.id}
+        className="flex flex-col gap-4 items-start max-w-2xl m-auto"
+      >
         <div className="flex flex-col gap-1 w-full">
           <label htmlFor="product-name">Product name:</label>
           <input
@@ -116,11 +119,7 @@ export const ProductForm = async ({ productId }: ProductFormProps) => {
                 Select a category
               </option>
               {categories.map((category: Category) => (
-                <option
-                  key={category.id}
-                  value={category.id}
-                  selected={category.id === product.categoryId}
-                >
+                <option key={category.id} value={category.id}>
                   {category.name}
                 </option>
               ))}
