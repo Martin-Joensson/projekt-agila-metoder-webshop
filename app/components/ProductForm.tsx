@@ -26,6 +26,11 @@ const emptyProduct: Product = {
   images: [],
 };
 
+//All of the below uses hooks and client things, can/will be used when hooks are requested or required eventually if needed, though it might need some rewriting to fit existing code.
+// interface ProductFormProps {
+//   productId?: number;
+// }
+
 // export default function ProductPage({ productId }: ProductFormProps) {
 //   const [categories, setCategories] = useState<Category[]>([]);
 //   const [formData, setFormData] = useState<Product>(emptyProduct);
