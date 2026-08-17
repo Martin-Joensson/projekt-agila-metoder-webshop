@@ -26,10 +26,6 @@ const emptyProduct: Product = {
   images: [],
 };
 
-interface ProductFormProps {
-  productId?: number;
-}
-
 // export default function ProductPage({ productId }: ProductFormProps) {
 //   const [categories, setCategories] = useState<Category[]>([]);
 //   const [formData, setFormData] = useState<Product>(emptyProduct);
@@ -80,13 +76,13 @@ interface ProductFormProps {
 //     setFormData(emptyProduct);
 //   };
 
-export default async function ProductPage({
+export default async function ProductForm({
   productId,
 }: {
   productId?: number;
 }) {
   const product = productId
-    ? await fetch(`${API_URL}/${productId}`).then((res) => res.json())
+    ? await fetch(`${API_URL}/products/${productId}`).then((res) => res.json())
     : emptyProduct;
 
   const categories = await fetch(`${API_URL}/categories`).then((res) =>

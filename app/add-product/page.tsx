@@ -1,9 +1,9 @@
-import Product from "@/components/Product";
+import ProductForm from "@/components/ProductForm";
 
 export default function ProductPage() {
   return (
     <main>
-      <Product />
+      <ProductForm />
     </main>
   );
 }
