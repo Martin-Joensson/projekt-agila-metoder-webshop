@@ -1,7 +1,9 @@
-export default function AddProductPage() {
+import { ProductForm } from "@/components/ProductForm";
+
+export default function ProductPage() {
   return (
     <main>
-      <div>Add Product Design goes here.</div>
+      <ProductForm />
     </main>
   );
 }
