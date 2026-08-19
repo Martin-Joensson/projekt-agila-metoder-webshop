@@ -13,7 +13,9 @@ type ProductCardProps = Pick<
   | "availabilityStatus"
   | "stock"
   | "price"
->;
+> & {
+  onDelete: (sku: string) => void;
+};
 
 export default function ProductCard({
   id,
@@ -25,6 +27,7 @@ export default function ProductCard({
   availabilityStatus,
   stock,
   price,
+  onDelete,
 }: ProductCardProps) {
   const availabilityColor: string =
     availabilityStatus === "In Stock"
@@ -32,6 +35,11 @@ export default function ProductCard({
       : availabilityStatus === "Low Stock"
         ? "text-orange-500"
         : "text-red-500";
+
+  const handleDeleteClick = () => {
+    console.info("Deleting item: ", title);
+    onDelete(sku || "");
+  };
 
   return (
     <article className="product-table-grid | bg-white">
@@ -61,6 +69,7 @@ export default function ProductCard({
         <button
           type="button"
           className="material-symbols p-1 rounded-lg hover:outline-2"
+          onClick={handleDeleteClick}
         >
           delete
         </button>

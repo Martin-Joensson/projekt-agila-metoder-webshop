@@ -15,8 +15,6 @@ export default async function Home() {
     `${API_URL}/products/?_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category`,
   ).then((res) => res.json());
 
-  console.log(products);
-
   return (
     <main className="max-w-7xl w-full mx-auto p-4 flex flex-col gap-4">
       <div className="flex flex-col sm:flex-row gap-2">
