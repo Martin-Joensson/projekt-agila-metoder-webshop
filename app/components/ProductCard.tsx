@@ -1,10 +1,12 @@
 import type { Product } from "@/types";
 import { Modal } from "./Modal";
+import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
 type ProductCardProps = Pick<
   Product,
+  | "id"
   | "title"
   | "sku"
   | "thumbnail"
@@ -18,6 +20,7 @@ type ProductCardProps = Pick<
 };
 
 export default function ProductCard({
+  id,
   title,
   sku,
   thumbnail,
@@ -74,12 +77,13 @@ export default function ProductCard({
         >
           delete
         </button>
-        <button
-          type="button"
+
+        <Link
           className="material-symbols p-1 rounded-lg hover:outline-2"
+          href={`/edit-product/${id}`}
         >
           edit
-        </button>
+        </Link>
       </div>
       <Modal
         isOpen={isOpen}

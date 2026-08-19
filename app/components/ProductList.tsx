@@ -36,6 +36,7 @@ export const ProductList = ({
           >
             <ProductCard
               key={product.id}
+              id={product.id}
               title={product.title}
               sku={product.sku}
               thumbnail={product.thumbnail}

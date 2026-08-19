@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Banner() {
   return (
     <header className=" bg-white border-b border-gray-300">
@@ -8,12 +10,14 @@ export default function Banner() {
             Manage and track your global product catalogue across all categories
           </p>
         </div>
-        <button type="button" className="bg-indigo-500 rounded-xl">
-          <div className="px-4 flex items-center gap-2 text-white">
-            <span className="material-symbols text-xl font-bold">add</span>
-            <p>Add Product</p>
-          </div>
-        </button>
+
+        <Link
+          href={"add-product"}
+          className="px-4 flex items-center gap-2 text-white bg-indigo-500 rounded-xl hover:bg-indigo-900 ease-in duration-100"
+        >
+          <span className="material-symbols text-xl font-bold">add</span>
+          <p>Add Product</p>
+        </Link>
       </div>
     </header>
   );
