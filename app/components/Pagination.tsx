@@ -1,10 +1,14 @@
+"use client"
 import { ProductsResponse } from "@/types";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type PaginationProps = Omit<ProductsResponse, "products">;
 
 export const Pagination = ({ page, pages, total, limit }: PaginationProps) => {
+  const router = useRouter()
   const visiblePages = [];
+
 
   const start = Math.max(1, page - 2);
   const end = Math.min(pages, page + 2);
