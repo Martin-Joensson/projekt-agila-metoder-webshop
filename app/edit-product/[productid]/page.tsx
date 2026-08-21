@@ -1,19 +1,16 @@
+import { ProductForm } from "@/components/ProductForm";
+
 type Props = {
   params: Promise<{
     productid: string;
   }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default async function EditProductPage({ params }: Props) {
+export default async function EditProductPage({ params, searchParams }: Props) {
   const { productid } = await params;
+  const query = await searchParams;
+  const productId = Number(productid);
 
-  console.log(productid);
-
-  return (
-    <div>
-      <h2 className="text-2xl font-bold">Edit Product</h2>
-          <p>Product ID: {productid}</p>
-          {/* shared component for creating/editing products */}
-    </div>
-  );
+  return <ProductForm productId={productId} searchParams={query} />;
 }
