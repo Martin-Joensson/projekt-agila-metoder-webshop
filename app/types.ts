@@ -53,3 +53,5 @@ export interface ProductsResponse {
   page: number;
   pages: number;
 }
+
+export type CategoriesResponse = Category[];
