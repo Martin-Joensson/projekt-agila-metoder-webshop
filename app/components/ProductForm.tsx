@@ -48,8 +48,6 @@ export const ProductForm = async ({
     return Array.isArray(value) ? (value[0] ?? fallback) : (value ?? fallback);
   };
 
-  console.log(searchParams);
-
   return (
     <article className="flex flex-col m-auto max-w-7xl items-center">
       <h2 className="text-2xl">
