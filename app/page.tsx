@@ -5,8 +5,10 @@ import { SearchBar } from "./components/SearchBar";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
+export default async function Home({searchParams} :{
+  searchParams: Promise<{[key: string]: string | string[] | undefined}> ;
+}) {
 
-export default async function Home() {
   //Additional fetch for statistics basically.
   const { products: allProducts }: ProductsResponse = await fetch(
     `${API_URL}/products/?_sort=id&_order=desc&_expand=category`,
@@ -16,8 +18,9 @@ export default async function Home() {
   // in this fetch we sort using _sort and _order and we limit the number of products using _limit
   // we also use _expand to get the relational category data
   // we can use the other destructed variables like page, total and so on to create pagination or show info
+  const { page:currentPage = "1" } =  await searchParams;
   const { products, total, page, pages, limit }: ProductsResponse = await fetch(
-    `${API_URL}/products/?_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category`,
+    `${API_URL}/products/?_page=${currentPage}&_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category`,
   ).then((res) => res.json());
 
   const inStock = allProducts.filter((product) => (product.stock ?? 0) >= 10);
