@@ -1,5 +1,5 @@
 import { FilterCard } from "./components/FilterCard";
-import type { ProductsResponse } from "./types";
+import type { Product, ProductsResponse } from "./types";
 import { ProductList } from "@/components/ProductList";
 import { SearchBar } from "./components/SearchBar";
 
@@ -8,6 +8,12 @@ const defaultLimit = "6";
 export default async function Home({searchParams} :{
   searchParams: Promise<{[key: string]: string | string[] | undefined}> ;
 }) {
+
+  //Additional fetch for statistics basically.
+  const { products: allProducts }: ProductsResponse = await fetch(
+    `${API_URL}/products/?_sort=id&_order=desc&_expand=category`,
+  ).then((res) => res.json());
+
   // we use the fetch() method to get the products from the API
   // in this fetch we sort using _sort and _order and we limit the number of products using _limit
   // we also use _expand to get the relational category data
@@ -16,14 +22,22 @@ export default async function Home({searchParams} :{
   const { products, total, page, pages, limit }: ProductsResponse = await fetch(
     `${API_URL}/products/?_page=${currentPage}&_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category`,
   ).then((res) => res.json());
-  
+
+  const inStock = allProducts.filter((product) => (product.stock ?? 0) >= 10);
+  const lowStock = allProducts.filter(
+    (product) => (product.stock ?? 0) > 0 && (product.stock ?? 0) < 10,
+  );
+  const outOfStock = allProducts.filter(
+    (product) => (product.stock ?? 0) === 0,
+  );
+
   return (
     <main className="max-w-7xl w-full mx-auto p-4 flex flex-col gap-4">
       <div className="flex flex-col sm:flex-row gap-2">
-        <FilterCard category="products" value={1203} />
-        <FilterCard category="instock" value={123} />
-        <FilterCard category="lowstock" value={33} />
-        <FilterCard category="outofstock" value={3} />
+        <FilterCard category="products" value={allProducts.length} />
+        <FilterCard category="instock" value={inStock.length} />
+        <FilterCard category="lowstock" value={lowStock.length} />
+        <FilterCard category="outofstock" value={outOfStock.length} />
       </div>
       <SearchBar />
       <ProductList
