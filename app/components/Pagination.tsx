@@ -1,5 +1,3 @@
-"use client";
-
 import { ProductsResponse } from "@/types";
 import Link from "next/link";
 
