@@ -5,23 +5,33 @@ import type { CategoriesResponse } from "@/types";
 import { ChangeEvent } from "react";
 type SearchProps = {
   categories: CategoriesResponse;
+  stock: string[];
 };
 
-export const SearchBar = ({ categories }: SearchProps) => {
-  // console.log("Categories: ", categories);
-
+export const SearchBar = ({ categories, stock }: SearchProps) => {
   const searchParams = useSearchParams();
 
   const category = searchParams.get("category");
+  const stockParam = searchParams.get("stock");
   const router = useRouter();
 
-  function changeCategory(event: ChangeEvent<HTMLSelectElement>): void {
-    const categorySlug = event.currentTarget.value;
-     if (categorySlug) {
-       router.replace(`/?category=${categorySlug}`);
-     } else {
-       router.replace("/");
-     }
+  function changeFilter(
+    event: ChangeEvent<HTMLSelectElement>,
+    filter: "category" | "stock",
+  ) {
+    const value = event.currentTarget.value;
+
+    const params = new URLSearchParams(searchParams.toString());
+
+    if (value) {
+      params.set(filter, value);
+    } else {
+      params.delete(filter);
+    }
+
+    params.delete("page");
+
+    router.replace(`/?${params.toString()}`);
   }
 
   return (
@@ -36,7 +46,6 @@ export const SearchBar = ({ categories }: SearchProps) => {
       />
 
       <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-4">
-        {/* Filter on category */}
         <label htmlFor="category-filter" className="sr-only">
           Filter by category:
         </label>
@@ -44,7 +53,7 @@ export const SearchBar = ({ categories }: SearchProps) => {
           id="category-filter"
           className="w-full sm:w-auto p-2 border border-gray-300 hover:bg-gray-200 active:bg-gray-300 rounded-md"
           value={category ?? ""}
-          onChange={changeCategory}
+          onChange={(event) => changeFilter(event, "category")}
         >
           <option value="">All categories</option>
           {categories.map((category) => (
@@ -54,15 +63,22 @@ export const SearchBar = ({ categories }: SearchProps) => {
           ))}
         </select>
 
-        {/* Filter on stock */}
         <label htmlFor="stock-filter" className="sr-only">
           Filter by stock-availability:
         </label>
         <select
           id="stock-filter"
           className="w-full sm:w-auto p-2 border border-gray-300  hover:bg-gray-200 active:bg-gray-300 rounded-md"
+          value={stockParam ?? ""}
+          onChange={(event) => changeFilter(event, "stock")}
         >
-          <option>All Stock</option>
+          <option value="">All Stock</option>
+
+          {stock.map((status) => (
+            <option key={status} value={status}>
+              {status}
+            </option>
+          ))}
         </select>
 
         <button

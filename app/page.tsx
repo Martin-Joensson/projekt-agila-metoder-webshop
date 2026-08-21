@@ -10,10 +10,11 @@ export default async function Home({
 }: {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const categories: CategoriesResponse  = await fetch(
+  const categories: CategoriesResponse = await fetch(
     `${API_URL}/categories`,
   ).then((res) => res.json());
 
+  const stock = ["In Stock", "Low Stock", "Out of Stock"];
 
   console.log("Page Cat: ", categories);
 
@@ -26,7 +27,11 @@ export default async function Home({
   // in this fetch we sort using _sort and _order and we limit the number of products using _limit
   // we also use _expand to get the relational category data
   // we can use the other destructed variables like page, total and so on to create pagination or show info
-  const { page: currentPage = "1", category: categorySlug = "" } = await searchParams;
+  const {
+    page: currentPage = "1",
+    category: categorySlug = "",
+    stock: stockStatus = "",
+  } = await searchParams;
 
   const query = new URLSearchParams({
     _page: String(currentPage),
@@ -43,16 +48,27 @@ export default async function Home({
     );
   }
 
+    if (stockStatus) {
+      query.set(
+        "q",
+        Array.isArray(stockStatus) ? stockStatus[0] : stockStatus,
+      );
+    }
+
   const { products, total, page, pages, limit }: ProductsResponse = await fetch(
     `${API_URL}/products/?${query.toString()}`,
   ).then((res) => res.json());
 
-  const inStock = allProducts.filter((product) => (product.stock ?? 0) >= 10);
-  const lowStock = allProducts.filter(
-    (product) => (product.stock ?? 0) > 0 && (product.stock ?? 0) < 10,
+  // Change to "availabilityStatus": "Low Stock", "In Stock", "Out of Stock"
+
+  const inStock = allProducts.filter((product) =>
+    (product.availabilityStatus ?? "").toLowerCase().includes("in stock"),
   );
-  const outOfStock = allProducts.filter(
-    (product) => (product.stock ?? 0) === 0,
+  const lowStock = allProducts.filter((product) =>
+    (product.availabilityStatus ?? "").toLowerCase().includes("low stock"),
+  );
+  const outOfStock = allProducts.filter((product) =>
+    (product.availabilityStatus ?? "").toLowerCase().includes("out of stock"),
   );
 
   return (
@@ -63,7 +79,7 @@ export default async function Home({
         <FilterCard category="lowstock" value={lowStock.length} />
         <FilterCard category="outofstock" value={outOfStock.length} />
       </div>
-      <SearchBar categories={categories} />
+      <SearchBar categories={categories} stock={stock} />
       <ProductList
         products={products}
         page={page}
