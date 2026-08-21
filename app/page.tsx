@@ -16,7 +16,6 @@ export default async function Home({searchParams} :{
   const { products, total, page, pages, limit }: ProductsResponse = await fetch(
     `${API_URL}/products/?_page=${currentPage}&_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category`,
   ).then((res) => res.json());
-  console.log("hello I am being re-rendered")
   
   return (
     <main className="max-w-7xl w-full mx-auto p-4 flex flex-col gap-4">
