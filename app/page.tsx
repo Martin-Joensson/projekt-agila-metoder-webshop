@@ -33,6 +33,17 @@ export default async function Home({
     stock: stockStatus = "",
   } = await searchParams;
 
+  const selectedCategorySlug = Array.isArray(categorySlug)
+    ? categorySlug[0]
+    : categorySlug;
+  const selectedStockStatus = Array.isArray(stockStatus)
+    ? stockStatus[0]
+    : stockStatus;
+
+  const selectedCategory = categories.find(
+    (category) => category.slug === selectedCategorySlug,
+  );
+
   const query = new URLSearchParams({
     _page: String(currentPage),
     _limit: defaultLimit,
@@ -40,20 +51,14 @@ export default async function Home({
     _order: "desc",
     _expand: "category",
   });
-
-  if (categorySlug) {
-    query.set(
-      "q",
-      Array.isArray(categorySlug) ? categorySlug[0] : categorySlug,
-    );
+  
+  if (selectedCategory) {
+    query.set("categoryId", String(selectedCategory.id));
   }
 
-    if (stockStatus) {
-      query.set(
-        "q",
-        Array.isArray(stockStatus) ? stockStatus[0] : stockStatus,
-      );
-    }
+  if (selectedStockStatus) {
+    query.set("availabilityStatus", selectedStockStatus);
+  }
 
   const { products, total, page, pages, limit }: ProductsResponse = await fetch(
     `${API_URL}/products/?${query.toString()}`,
