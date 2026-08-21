@@ -26,9 +26,25 @@ export default async function Home({
   // in this fetch we sort using _sort and _order and we limit the number of products using _limit
   // we also use _expand to get the relational category data
   // we can use the other destructed variables like page, total and so on to create pagination or show info
-  const { page: currentPage = "1" } = await searchParams;
+  const { page: currentPage = "1", category: categorySlug = "" } = await searchParams;
+
+  const query = new URLSearchParams({
+    _page: String(currentPage),
+    _limit: defaultLimit,
+    _sort: "id",
+    _order: "desc",
+    _expand: "category",
+  });
+
+  if (categorySlug) {
+    query.set(
+      "q",
+      Array.isArray(categorySlug) ? categorySlug[0] : categorySlug,
+    );
+  }
+
   const { products, total, page, pages, limit }: ProductsResponse = await fetch(
-    `${API_URL}/products/?_page=${currentPage}&_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category`,
+    `${API_URL}/products/?${query.toString()}`,
   ).then((res) => res.json());
 
   const inStock = allProducts.filter((product) => (product.stock ?? 0) >= 10);

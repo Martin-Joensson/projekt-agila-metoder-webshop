@@ -11,11 +11,17 @@ export const SearchBar = ({ categories }: SearchProps) => {
   // console.log("Categories: ", categories);
 
   const searchParams = useSearchParams();
+
+  const category = searchParams.get("category");
   const router = useRouter();
-  
+
   function changeCategory(event: ChangeEvent<HTMLSelectElement>): void {
     const categorySlug = event.currentTarget.value;
-    router.replace(`/?category=${categorySlug}`)
+     if (categorySlug) {
+       router.replace(`/?category=${categorySlug}`);
+     } else {
+       router.replace("/");
+     }
   }
 
   return (
@@ -37,6 +43,7 @@ export const SearchBar = ({ categories }: SearchProps) => {
         <select
           id="category-filter"
           className="w-full sm:w-auto p-2 border border-gray-300 hover:bg-gray-200 active:bg-gray-300 rounded-md"
+          value={category ?? ""}
           onChange={changeCategory}
         >
           <option value="">All categories</option>
