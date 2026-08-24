@@ -32,12 +32,14 @@ export default async function Home({
     page: currentPage = "1",
     category: categorySlug = "",
     stock: stockStatus = "",
+    search = "",
   } = await searchParams;
 
   const urlParams = new URLSearchParams();
   urlParams.set("page", currentPage);
   urlParams.set("category", categorySlug);
   urlParams.set("stock", stockStatus);
+  urlParams.set("search", search);
 
   const selectedCategory = categories.find(
     (category) => category.slug === categorySlug,
@@ -56,6 +58,10 @@ export default async function Home({
 
   if (stockStatus) {
     query.set("availabilityStatus", stockStatus);
+  }
+
+  if (search) {
+    query.set("title_like", search);
   }
 
   const { products, total, page, pages, limit }: ProductsResponse = await fetch(
