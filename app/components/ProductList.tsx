@@ -1,21 +1,21 @@
-"use client";
-import { useState } from "react";
 import { Pagination } from "./Pagination";
 import ProductCard from "./ProductCard";
-import type { ProductsResponse, Product } from "@/types";
+import type { ProductsResponse } from "@/types";
 type ProductListProps = ProductsResponse;
 
 export const ProductList = ({
-  products: initialProducts,
+  products,
   pages,
   page,
   total,
   limit,
 }: ProductListProps) => {
-  const [products, setProducts] = useState<Product[]>(initialProducts);
+  /* Removed delete functionality for now as it was not really helping and causing issues */
+  //const [productsState, setProductsState] = useState<Product[]>(initialProducts);
 
   const handleDeleteProduct = (sku: string) => {
-    setProducts((prev) => prev.filter((p) => p.sku !== sku));
+    console.log("One day I'll be useful")
+    //setProducts((prev) => prev.filter((p) => p.sku !== sku));
   };
 
   return (
@@ -45,7 +45,6 @@ export const ProductList = ({
               availabilityStatus={product.availabilityStatus}
               stock={product.stock}
               price={product.price}
-              onDelete={handleDeleteProduct}
             />
           </li>
         ))}

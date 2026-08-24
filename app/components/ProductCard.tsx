@@ -16,7 +16,7 @@ type ProductCardProps = Pick<
   | "stock"
   | "price"
 > & {
-  onDelete: (sku: string) => void;
+  onDelete?: (sku: string) => void;
 };
 
 export default function ProductCard({
@@ -43,6 +43,7 @@ export default function ProductCard({
   const handleDeleteClick = () => {
     console.info("Deleting item: ", title);
     setIsOpen(true);
+    //onDelete(sku || "");
   };
 
   return (
@@ -73,7 +74,7 @@ export default function ProductCard({
         <button
           type="button"
           className="material-symbols p-1 rounded-lg hover:outline-2"
-          onClick={handleDeleteClick}
+        // onClick={handleDeleteClick}
         >
           delete
         </button>
