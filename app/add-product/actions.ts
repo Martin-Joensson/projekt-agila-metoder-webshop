@@ -11,6 +11,7 @@ export async function AddProductAction(formdata: FormData){
     const thumbnail = formdata.get("thumbnail") as string;
     const categoryId = formdata.get("categoryId") as string;
     const brand = formdata.get("brand") as string;
+    const stock = formdata.get("stock") as string;
 
     const newProduct = {
         title,
@@ -18,7 +19,8 @@ export async function AddProductAction(formdata: FormData){
         description,
         thumbnail,
         categoryId: parseInt(categoryId, 10),
-        brand
+        brand,
+        stock
     }
 
     try {
@@ -42,5 +44,19 @@ export async function AddProductAction(formdata: FormData){
     revalidatePath("/")
     redirect("/")
 
-
 }
+
+// export async function DeleteProductAction(id: number){
+//     try {
+//         await fetch(`http://localhost:4000/products/${id}`, {
+//             method: "DELETE",
+//         });
+
+//         revalidatePath("/")
+
+//         return true;
+
+//     } catch (error) {
+        
+//     }
+// }
