@@ -1,6 +1,10 @@
 import { AddProductAction } from "@/add-product/actions";
 import { Product } from "@/types";
-import { ConfirmSubmitButton } from "@/components/ConfirmSubmitButton";
+import SaveButton, {
+  CancelButton,
+  ConfirmSubmitButton,
+} from "@/components/ConfirmSubmitButton";
+import { redirect } from "next/navigation";
 
 interface Category {
   id: number;
@@ -162,9 +166,10 @@ export const ProductForm = async ({
         </div>
         <div className="flex m-auto gap-5">
           <ConfirmSubmitButton />
-          <button //CANCEL OCH SUBMIT FÖR ATTT GÅ TILLBAKA TILL ADMIN
+          <button
             className="bg-red-500 w-fit m-auto p-2 mbs-3 rounded-xl hover:bg-red-800 ease-in duration-200 cursor-pointer"
             type="button"
+            onClick={CancelButton}
           >
             Cancel
           </button>
