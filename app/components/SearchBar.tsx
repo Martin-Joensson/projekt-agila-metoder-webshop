@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import type { CategoriesResponse } from "@/types";
 import { ChangeEvent } from "react";
+import { updateFilter } from "../utils/updateFilter";
 type SearchProps = {
   categories: CategoriesResponse;
   stock: string[];
@@ -19,17 +20,11 @@ export const SearchBar = ({ categories, stock }: SearchProps) => {
     event: ChangeEvent<HTMLSelectElement>,
     filter: "category" | "stock",
   ) {
-    const value = event.currentTarget.value;
-
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (value) {
-      params.set(filter, value);
-    } else {
-      params.delete(filter);
-    }
-
-    params.delete("page");
+    const params = updateFilter(
+      searchParams,
+      filter,
+      event.currentTarget.value,
+    );
 
     router.replace(`/?${params.toString()}`);
   }
