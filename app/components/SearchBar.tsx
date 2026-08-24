@@ -1,10 +1,10 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import type { CategoriesResponse } from "@/types";
+import type { Category } from "@/types";
 import { ChangeEvent } from "react";
 type SearchProps = {
-  categories: CategoriesResponse;
+  categories: Category[];
   stock: string[];
 };
 

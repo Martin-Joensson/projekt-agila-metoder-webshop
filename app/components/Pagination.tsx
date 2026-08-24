@@ -1,14 +1,12 @@
-"use client"
+"use client";
 import { ProductsResponse } from "@/types";
-import { parseAppSegmentConfig } from "next/dist/build/segment-config/app/app-segment-config";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
 type PaginationProps = Omit<ProductsResponse, "products">;
 
 export const Pagination = ({ page, pages }: PaginationProps) => {
- 
-   const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   const getPageUrl = (pageNumber: number) => {
     const params = new URLSearchParams(searchParams.toString());
@@ -16,9 +14,6 @@ export const Pagination = ({ page, pages }: PaginationProps) => {
 
     return `?${params.toString()}`;
   };
-
-  const urlPage = searchParams.get("page");
-  // console.log("Page: ", urlPage)
 
   const start = Math.max(2, page - 2);
   const end = Math.min(pages - 1, page + 2);

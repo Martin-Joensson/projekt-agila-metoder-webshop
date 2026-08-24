@@ -1,5 +1,5 @@
 import { FilterCard } from "./components/FilterCard";
-import type { Product, ProductsResponse, CategoriesResponse } from "./types";
+import type { Category, ProductsResponse } from "./types";
 import { ProductList } from "@/components/ProductList";
 import { SearchBar } from "./components/SearchBar";
 
@@ -8,19 +8,19 @@ const defaultLimit = "6";
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  searchParams: Promise<{
+    [key: string]: string | undefined;
+  }>;
 }) {
-  const categories: CategoriesResponse = await fetch(
-    `${API_URL}/categories`,
-  ).then((res) => res.json());
+  const categories: Category[] = await fetch(`${API_URL}/categories`).then(
+    (res) => res.json(),
+  );
 
   const stock = ["In Stock", "Low Stock", "Out of Stock"];
 
-  console.log("Page Cat: ", categories);
-
   //Additional fetch for statistics basically.
   const { products: allProducts }: ProductsResponse = await fetch(
-    `${API_URL}/products/?_sort=id&_order=desc&_expand=category`,
+    `${API_URL}/products`,
   ).then((res) => res.json());
 
   // we use the fetch() method to get the products from the API
@@ -33,15 +33,13 @@ export default async function Home({
     stock: stockStatus = "",
   } = await searchParams;
 
-  const selectedCategorySlug = Array.isArray(categorySlug)
-    ? categorySlug[0]
-    : categorySlug;
-  const selectedStockStatus = Array.isArray(stockStatus)
-    ? stockStatus[0]
-    : stockStatus;
+  const urlParams = new URLSearchParams();
+  urlParams.set("page", currentPage);
+  urlParams.set("category", categorySlug);
+  urlParams.set("stock", stockStatus);
 
   const selectedCategory = categories.find(
-    (category) => category.slug === selectedCategorySlug,
+    (category) => category.slug === categorySlug,
   );
 
   const query = new URLSearchParams({
@@ -49,15 +47,14 @@ export default async function Home({
     _limit: defaultLimit,
     _sort: "id",
     _order: "desc",
-    _expand: "category",
   });
-  
+
   if (selectedCategory) {
     query.set("categoryId", String(selectedCategory.id));
   }
 
-  if (selectedStockStatus) {
-    query.set("availabilityStatus", selectedStockStatus);
+  if (stockStatus) {
+    query.set("availabilityStatus", stockStatus);
   }
 
   const { products, total, page, pages, limit }: ProductsResponse = await fetch(
