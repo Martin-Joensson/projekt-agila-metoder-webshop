@@ -2,14 +2,23 @@
 
 import { useRef, useState } from "react";
 import { Modal } from "@/components/Modal";
+import { useFormStatus } from "react-dom";
 
 export function ConfirmSubmitButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const formRef = useRef<HTMLFormElement | null>(null);
 
   const confirmSubmit = () => {
+    const form = formRef.current;
+
+    if (!form || !form.checkValidity()) {
+      form?.reportValidity();
+      setIsModalOpen(false);
+      return;
+    }
+
     setIsModalOpen(false);
-    formRef.current?.requestSubmit();
+    form.requestSubmit();
   };
 
   return (
@@ -19,7 +28,18 @@ export function ConfirmSubmitButton() {
         type="submit"
         onClick={(event) => {
           event.preventDefault();
-          formRef.current = event.currentTarget.form;
+
+          const form = event.currentTarget.form;
+
+          if (!form) return;
+
+          formRef.current = form;
+
+          if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+          }
+
           setIsModalOpen(true);
         }}
       >
@@ -34,5 +54,34 @@ export function ConfirmSubmitButton() {
         Are you sure you want to submit this product?
       </Modal>
     </>
+  );
+}
+
+export function CancelButton() {
+  window.location.href = "/";
+}
+
+export default function SaveButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button
+      className="flex items-center justify-center gap-2 border rounded-lg py-2 px-4 bg-accent border-neutral-200 cursor-pointer hover:bg-warning transition-colors"
+      type="submit"
+      disabled={pending}
+      aria-busy={pending}
+    >
+      {pending ? (
+        <>
+          <span
+            className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent"
+            aria-hidden="true"
+          />
+          <span>Saving...</span>
+        </>
+      ) : (
+        "Save"
+      )}
+    </button>
   );
 }
