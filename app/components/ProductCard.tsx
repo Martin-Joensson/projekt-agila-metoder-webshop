@@ -1,8 +1,10 @@
+"use client"
 import type { Product } from "@/types";
 import { Modal } from "./Modal";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useTransition, useState } from "react";
+import { deleteProduct } from "@/actions";
 
 type ProductCardProps = Pick<
   Product,
@@ -15,9 +17,7 @@ type ProductCardProps = Pick<
   | "availabilityStatus"
   | "stock"
   | "price"
-> & {
-  onDelete?: (sku: string) => void;
-};
+>;
 
 export default function ProductCard({
   id,
@@ -29,7 +29,6 @@ export default function ProductCard({
   availabilityStatus,
   stock,
   price,
-  onDelete,
 }: ProductCardProps) {
   const availabilityColor: string =
     availabilityStatus === "In Stock"
@@ -41,10 +40,18 @@ export default function ProductCard({
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDeleteClick = () => {
-    console.info("Deleting item: ", title);
+    console.info("Delete modal showing for item: ", title);
     setIsOpen(true);
-    //onDelete(sku || "");
   };
+
+  const [isPending, startTransition] = useTransition();
+
+  const handleConfirmDelete = () => {
+    startTransition(async () => {
+      await deleteProduct(id)
+      setIsOpen(false);
+    })
+  }
 
   return (
     <article className="product-table-grid | bg-white">
@@ -66,7 +73,7 @@ export default function ProductCard({
       <p className="text-right">
         <span className={`font-semibold ${availabilityColor}`}>
           {availabilityStatus}
-        </span>{" "}
+        </span>
         (<span>{stock}</span>)
       </p>
       <p className="text-right font-semibold">{euros.format(price)}</p>
@@ -74,7 +81,7 @@ export default function ProductCard({
         <button
           type="button"
           className="material-symbols p-1 rounded-lg hover:outline-2"
-        // onClick={handleDeleteClick}
+          onClick={handleDeleteClick}
         >
           delete
         </button>
@@ -88,9 +95,11 @@ export default function ProductCard({
       </div>
       <Modal
         isOpen={isOpen}
-        onConfirm={() => onDelete(sku || "")}
+        onConfirm={handleConfirmDelete}
         onClose={() => setIsOpen(false)}
         title="Are you sure you want to delete this item?"
+        isPending={isPending}
+        pendingText="Deleting..."
       >
         <p>{title}</p>
       </Modal>
@@ -98,7 +107,7 @@ export default function ProductCard({
   );
 }
 
-const euros = new Intl.NumberFormat("en-UK", {
+const euros = new Intl.NumberFormat("en-IE", {
   style: "currency",
   currency: "EUR",
 });
