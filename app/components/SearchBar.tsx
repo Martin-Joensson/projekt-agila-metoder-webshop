@@ -4,6 +4,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import type { Category } from "@/types";
 import { ChangeEvent } from "react";
 import { updateFilter } from "../utils/updateFilter";
+import Search from "@/components/Search";
+
 type SearchProps = {
   categories: Category[];
   stock: string[];
@@ -31,14 +33,7 @@ export const SearchBar = ({ categories, stock }: SearchProps) => {
 
   return (
     <form className="flex items-center flex-col sm:flex-row bg-white rounded-lg border border-gray-300 p-5 gap-4">
-      <label htmlFor="search-product" className="sr-only">
-        Search for product:
-      </label>
-      <input
-        id="search-product"
-        placeholder="Search products..."
-        className="w-full sm:w-auto flex-1 px-3 py-2 border border-gray-300 rounded-md"
-      />
+      <Search />
 
       <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-4">
         <label htmlFor="category-filter" className="sr-only">
