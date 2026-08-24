@@ -1,0 +1,46 @@
+"use server"
+
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation"
+
+export async function AddProductAction(formdata: FormData){
+
+    const title = formdata.get("title") as string;
+    const price = formdata.get("price") as string;
+    const description = formdata.get("description") as string;
+    const thumbnail = formdata.get("thumbnail") as string;
+    const categoryId = formdata.get("categoryId") as string;
+    const brand = formdata.get("brand") as string;
+
+    const newProduct = {
+        title,
+        price: parseInt(price,10),
+        description,
+        thumbnail,
+        categoryId: parseInt(categoryId, 10),
+        brand
+    }
+
+    try {
+        const response = await fetch("http://localhost:4000/products", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newProduct),
+        });
+
+        if (!response.ok) {
+            throw new Error(`API returned ${response.status} ${response.statusText}`);
+        }
+        
+    } catch (error) {
+        const message = error instanceof Error ? error.message : "Unknown error";
+        throw new Error(`Failed to create product: ${message}`);
+    }
+    
+    revalidatePath("/")
+    redirect("/")
+
+
+}
