@@ -11803,20 +11803,6 @@
       ],
       "thumbnail": "https://cdn.dummyjson.com/product-images/womens-watches/women's-wrist-watch/thumbnail.webp",
       "categoryId": 24
-    },
-    {
-      "title": "3213213",
-      "price": 12312,
-      "description": "fsafaf",
-      "thumbnail": "https://cdn.dummyjson.com/product-images/womens-watches/women's-wrist-watch/thumbnail.webp",
-      "categoryId": 3,
-      "brand": "Glamour Beauty",
-      "meta": {
-        "createdAt": "2026-08-24T11:46:44.179Z",
-        "updatedAt": "2026-08-24T11:46:44.179Z"
-      },
-      "id": 195,
-      "sku": "FUR-GLA-321-195"
     }
   ],
   "categories": [
