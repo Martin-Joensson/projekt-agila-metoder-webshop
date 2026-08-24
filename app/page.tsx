@@ -2,6 +2,7 @@ import { FilterCard } from "./components/FilterCard";
 import type { Category, ProductsResponse } from "./types";
 import { ProductList } from "@/components/ProductList";
 import { SearchBar } from "./components/SearchBar";
+import { Pagination } from "./components/Pagination";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
@@ -82,13 +83,16 @@ export default async function Home({
         <FilterCard category="outofstock" value={outOfStock.length} />
       </div>
       <SearchBar categories={categories} stock={stock} />
-      <ProductList
-        products={products}
-        page={page}
-        pages={pages}
-        total={total}
-        limit={limit}
-      />
+      <section className="rounded-lg border-gray-300 border overflow-hidden">
+        <ProductList products={products} />
+        <Pagination
+          page={page}
+          pages={pages}
+          total={total}
+          limit={limit}
+          urlParams={urlParams}
+        />
+      </section>
     </main>
   );
 }
