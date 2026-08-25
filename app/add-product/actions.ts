@@ -13,6 +13,7 @@ export async function AddProductAction(formdata: FormData) {
     const categoryId = formdata.get("categoryId") as string;
     const brand = formdata.get("brand") as string;
     const stock = formdata.get("stock") as string;
+    const john = formdata.get("stock") as string;
 
     const newProduct = {
         title,
