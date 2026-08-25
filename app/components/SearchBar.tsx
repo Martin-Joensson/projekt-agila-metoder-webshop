@@ -31,9 +31,16 @@ export const SearchBar = ({ categories, stock }: SearchProps) => {
     router.replace(`/?${params.toString()}`);
   }
 
+  function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+    e.preventDefault();
+  }
+
   return (
     <search>
-      <form className="flex items-center flex-col sm:flex-row bg-white rounded-lg border border-gray-300 p-5 gap-4">
+      <form
+        onSubmit={(e) => handleSubmit(e)}
+        className="flex items-center flex-col sm:flex-row bg-white rounded-lg border border-gray-300 p-5 gap-4"
+      >
         <Search />
 
         <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-4">
@@ -73,7 +80,7 @@ export const SearchBar = ({ categories, stock }: SearchProps) => {
           </select>
 
           <button
-            type="submit"
+            type="button"
             className="w-full bg-indigo-500 text-white sm:w-auto flex items-center gap-1 p-2 border border-gray-300  rounded-md hover:bg-indigo-900 active:translate-y-px"
           >
             <span className="material-symbols material-symbols-filled ">
