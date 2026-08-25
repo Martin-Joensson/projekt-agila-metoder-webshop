@@ -10,14 +10,6 @@ export const ProductList = ({
   total,
   limit,
 }: ProductListProps) => {
-  /* Removed delete functionality for now as it was not really helping and causing issues */
-  //const [productsState, setProductsState] = useState<Product[]>(initialProducts);
-
-  const handleDeleteProduct = (sku: string) => {
-    console.log("One day I'll be useful")
-    //setProducts((prev) => prev.filter((p) => p.sku !== sku));
-  };
-
   return (
     <section className="rounded-lg border-gray-300 border overflow-hidden">
       <ul className="bg-neutral-50">
