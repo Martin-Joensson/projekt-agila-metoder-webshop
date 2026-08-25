@@ -1,5 +1,5 @@
 "use client";
-import { debounce } from "@/lib/utils";
+import { debounce, isValidRegExp } from "@/lib/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function Search() {
@@ -9,7 +9,7 @@ export default function Search() {
 
   const handleSearch = debounce((term: string) => {
     const params = new URLSearchParams(searchParams);
-    if (term.length > 2) {
+    if (term.length > 2 && isValidRegExp(term)) {
       params.delete("page");
       params.set("search", term);
     } else {

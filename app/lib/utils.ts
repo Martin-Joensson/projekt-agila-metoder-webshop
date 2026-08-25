@@ -1,3 +1,4 @@
+// adapted from (2024) https://jsdev.space/snippets/debounce-ts/
 export function debounce<T extends unknown[], U>(
   callback: (...args: T) => U,
   delay: number,
@@ -9,4 +10,11 @@ export function debounce<T extends unknown[], U>(
   };
 }
 
-// adapted from (2024) https://jsdev.space/snippets/debounce-ts/
+export function isValidRegExp(pattern: string): boolean {
+  try {
+    RegExp(pattern);
+  } catch {
+    return false;
+  }
+  return true;
+}
