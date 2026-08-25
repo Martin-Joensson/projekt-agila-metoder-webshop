@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import type { Product } from "@/types";
 import { Modal } from "./Modal";
 import Link from "next/link";
@@ -40,7 +40,6 @@ export default function ProductCard({
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDeleteClick = () => {
-    console.info("Delete modal showing for item: ", title);
     setIsOpen(true);
   };
 
@@ -48,10 +47,13 @@ export default function ProductCard({
 
   const handleConfirmDelete = () => {
     startTransition(async () => {
-      await deleteProduct(id)
+      const result = await deleteProduct(id);
       setIsOpen(false);
-    })
-  }
+      if (result?.message) {
+        console.error(result.message);
+      }
+    });
+  };
 
   return (
     <article className="product-table-grid | bg-white">

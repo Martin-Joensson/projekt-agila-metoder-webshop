@@ -53,6 +53,12 @@ export function Modal({
     if (isOpen) onClose();
   };
 
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   if (!isOpen) return null;
 
   /*createPortal is a React function that renders a component outside its normal DOM hierarchy.
@@ -63,6 +69,7 @@ export function Modal({
     <dialog
       ref={dialogRef}
       onClose={handleClose}
+      onClick={handleBackdropClick}
       className="modal | fixed inset-0 m-auto bg-transparent p-0 border-0 backdrop:bg-black/50 backdrop:backdrop-blur-sm"
     >
       <div className="relative bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
