@@ -1,10 +1,9 @@
 import { AddProductAction } from "@/add-product/actions";
 import { Product } from "@/types";
-import SaveButton, {
+import {
   CancelButton,
   ConfirmSubmitButton,
 } from "@/components/ConfirmSubmitButton";
-import { redirect } from "next/navigation";
 
 interface Category {
   id: number;
@@ -37,10 +36,7 @@ interface ProductFormProps {
   searchParams?: Record<string, string | string[] | undefined>;
 }
 
-export const ProductForm = async ({
-  productId,
-  searchParams,
-}: ProductFormProps) => {
+export const ProductForm = async ({ productId }: ProductFormProps) => {
   const product = productId
     ? await fetch(`${API_URL}/products/${productId}`).then((res) => res.json())
     : emptyProduct;
@@ -48,11 +44,6 @@ export const ProductForm = async ({
   const categories = await fetch(`${API_URL}/categories`).then((res) =>
     res.json(),
   );
-
-  const getValue = (name: string, fallback: string | number) => {
-    const value = searchParams?.[name];
-    return Array.isArray(value) ? (value[0] ?? fallback) : (value ?? fallback);
-  };
 
   return (
     <article className="flex flex-col m-auto max-w-7xl items-center">
@@ -74,7 +65,7 @@ export const ProductForm = async ({
             type="text"
             className="border p-1 "
             name="title"
-            defaultValue={getValue("title", product.title)}
+            defaultValue={product.title}
             placeholder="Enter product title"
             required
           />
@@ -84,7 +75,7 @@ export const ProductForm = async ({
           <textarea
             id="product-description"
             name="description"
-            defaultValue={getValue("description", product.description)}
+            defaultValue={product.description}
             placeholder="Enter description"
             required
             className="w-full min-w-2xl min-h-8 field-sizing-content resize-none rounded border p-2"
@@ -96,7 +87,7 @@ export const ProductForm = async ({
             id="product-image"
             type="url"
             name="thumbnail"
-            defaultValue={getValue("thumbnail", product.thumbnail)}
+            defaultValue={product.thumbnail}
             placeholder="Enter thumbnail"
             required
             className="border p-1 rounded"
@@ -110,7 +101,7 @@ export const ProductForm = async ({
               id="product-price"
               type="number"
               name="price"
-              defaultValue={getValue("price", product.price)}
+              defaultValue={product.price}
               placeholder="Enter price"
               required
               className="border  h-8 p-1 rounded"
@@ -123,7 +114,7 @@ export const ProductForm = async ({
               id="product-stock"
               type="number"
               name="stock"
-              defaultValue={getValue("stock", product.stock)}
+              defaultValue={product.stock}
               placeholder="Enter stock"
               required
               className="border  h-8 p-1 rounded"
@@ -138,7 +129,7 @@ export const ProductForm = async ({
               id="product-brand"
               type="text"
               name="brand"
-              defaultValue={getValue("brand", product.brand ?? "")}
+              defaultValue={product.brand ?? ""}
               placeholder="Enter brand"
               required
               className="border  h-8 p-1 rounded"
@@ -149,7 +140,7 @@ export const ProductForm = async ({
             <select
               id="product-category"
               name="categoryId"
-              defaultValue={getValue("categoryId", product.categoryId)}
+              defaultValue={product.categoryId}
               required
               className="border h-8 rounded"
             >

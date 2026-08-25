@@ -1,9 +1,10 @@
-"use server"
+"use server";
 
 import { revalidatePath } from "next/cache";
 
-
-export async function AddProductAction(formdata: FormData){
+export async function AddProductAction(formdata: FormData) {
+    const API_URL = "http://localhost:4000/products";
+    const productId = formdata.get("productId")?.toString();
 
     const title = formdata.get("title") as string;
     const price = formdata.get("price") as string;
@@ -24,8 +25,8 @@ export async function AddProductAction(formdata: FormData){
     }
 
     try {
-        const response = await fetch("http://localhost:4000/products", {
-            method: "POST",
+        const response = await fetch(productId ? `${API_URL}/${productId}` : API_URL, {
+            method: productId ? "PATCH" : "POST",
             headers: {
                 "Content-Type": "application/json",
             },
