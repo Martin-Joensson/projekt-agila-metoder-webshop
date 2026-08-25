@@ -89,7 +89,8 @@ export function Modal({
           </button>
           <button
             onClick={onConfirm}
-            className="px-4 py-2 rounded bg-indigo-500 text-white hover:bg-indigo-700"
+            className="px-4 py-2 rounded bg-indigo-500 text-white hover:bg-indigo-700 disabled:bg-gray-400"
+            disabled={isPending}
           >
             {isPending ? pendingText : "Confirm"}
           </button>
