@@ -11,15 +11,9 @@ type BaseModalProps = {
   children: ReactNode;
 };
 
-type PendingModalProps = BaseModalProps & {
-  isPending: boolean;
-  pendingText: string;
-}
-
 type ModalProps =
   | BaseModalProps
-  | PendingModalProps;
-
+  | (BaseModalProps & { isPending: boolean; pendingText: string });
 
 export function Modal({
   isOpen,
@@ -28,31 +22,36 @@ export function Modal({
   title,
   children,
   ...rest
-
 }: ModalProps) {
-
   const isPending = "isPending" in rest ? rest.isPending : false;
-  const pendingText = isPending ? rest.pendingText : "";
+  const pendingText = "pendingText" in rest ? rest.pendingText : "";
 
-
-  const dialogRef = useRef<HTMLDialogElement>(null)
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
 
   // Open / close the dialog based on the isOpen prop
   useEffect(() => {
     const dialog = dialogRef.current;
-    if (!dialog) return;
-
-    if (isOpen) previousActiveElement.current = document.activeElement as HTMLElement;
+    if (!dialog) {
+      return;
+    }
     //If the isOpen prop is true, check if it's not already open and open it.
     // if isOpen is false, close the dialog
-    isOpen ? (!dialog.open && dialog.showModal()) : dialog.close();
+    if (isOpen) {
+      previousActiveElement.current = document.activeElement as HTMLElement;
+
+      if (!dialog.open) {
+        dialog.showModal();
+      }
+    } else if (dialog.open) {
+      dialog.close();
+    }
   }, [isOpen]);
 
   const handleClose = () => {
     previousActiveElement.current?.focus();
-    if (isOpen) onClose()
-  }
+    if (isOpen) onClose();
+  };
 
   if (!isOpen) return null;
 
@@ -90,5 +89,6 @@ export function Modal({
         </footer>
       </div>
     </dialog>,
-    document.body,);
+    document.body,
+  );
 }
