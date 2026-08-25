@@ -9,7 +9,12 @@ export default function Search() {
 
   const handleSearch = debounce((term: string) => {
     const params = new URLSearchParams(searchParams);
-    term.length > 2 ? params.set("search", term) : params.delete("search");
+    if (term.length > 2) {
+      params.delete("page");
+      params.set("search", term);
+    } else {
+      params.delete("search");
+    }
     replace(`${path}?${params.toString()}`, { scroll: false });
   }, 300);
 
