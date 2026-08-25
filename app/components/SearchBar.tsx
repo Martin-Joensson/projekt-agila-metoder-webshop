@@ -32,55 +32,57 @@ export const SearchBar = ({ categories, stock }: SearchProps) => {
   }
 
   return (
-    <form className="flex items-center flex-col sm:flex-row bg-white rounded-lg border border-gray-300 p-5 gap-4">
-      <Search />
+    <search>
+      <form className="flex items-center flex-col sm:flex-row bg-white rounded-lg border border-gray-300 p-5 gap-4">
+        <Search />
 
-      <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-4">
-        <label htmlFor="category-filter" className="sr-only">
-          Filter by category:
-        </label>
-        <select
-          id="category-filter"
-          className="w-full sm:w-auto p-2 border border-gray-300 hover:bg-gray-200 active:bg-gray-300 rounded-md"
-          value={category ?? ""}
-          onChange={(event) => changeFilter(event, "category")}
-        >
-          <option value="">All categories</option>
-          {categories.map((category) => (
-            <option key={category.id} value={category.slug}>
-              {category.name}
-            </option>
-          ))}
-        </select>
+        <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-4">
+          <label htmlFor="category-filter" className="sr-only">
+            Filter by category:
+          </label>
+          <select
+            id="category-filter"
+            className="w-full sm:w-auto p-2 border border-gray-300 hover:bg-gray-200 active:bg-gray-300 rounded-md"
+            value={category ?? ""}
+            onChange={(event) => changeFilter(event, "category")}
+          >
+            <option value="">All categories</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.slug}>
+                {category.name}
+              </option>
+            ))}
+          </select>
 
-        <label htmlFor="stock-filter" className="sr-only">
-          Filter by stock-availability:
-        </label>
-        <select
-          id="stock-filter"
-          className="w-full sm:w-auto p-2 border border-gray-300  hover:bg-gray-200 active:bg-gray-300 rounded-md"
-          value={stockParam ?? ""}
-          onChange={(event) => changeFilter(event, "stock")}
-        >
-          <option value="">All Stock</option>
+          <label htmlFor="stock-filter" className="sr-only">
+            Filter by stock-availability:
+          </label>
+          <select
+            id="stock-filter"
+            className="w-full sm:w-auto p-2 border border-gray-300  hover:bg-gray-200 active:bg-gray-300 rounded-md"
+            value={stockParam ?? ""}
+            onChange={(event) => changeFilter(event, "stock")}
+          >
+            <option value="">All Stock</option>
 
-          {stock.map((status) => (
-            <option key={status} value={status}>
-              {status}
-            </option>
-          ))}
-        </select>
+            {stock.map((status) => (
+              <option key={status} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
 
-        <button
-          type="submit"
-          className="w-full bg-indigo-500 text-white sm:w-auto flex items-center gap-1 p-2 border border-gray-300  rounded-md hover:bg-indigo-900 active:translate-y-px"
-        >
-          <span className="material-symbols material-symbols-filled ">
-            Filter_alt
-          </span>
-          <span>Search</span>
-        </button>
-      </div>
-    </form>
+          <button
+            type="submit"
+            className="w-full bg-indigo-500 text-white sm:w-auto flex items-center gap-1 p-2 border border-gray-300  rounded-md hover:bg-indigo-900 active:translate-y-px"
+          >
+            <span className="material-symbols material-symbols-filled ">
+              Filter_alt
+            </span>
+            <span>Search</span>
+          </button>
+        </div>
+      </form>
+    </search>
   );
 };

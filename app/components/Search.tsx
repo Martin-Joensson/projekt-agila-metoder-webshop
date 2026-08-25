@@ -25,6 +25,7 @@ export default function Search() {
       </label>
       <input
         id="search-product"
+        type="search"
         placeholder="Search products..."
         className="w-full sm:w-auto flex-1 px-3 py-2 border border-gray-300 rounded-md"
         onChange={(e) => {
