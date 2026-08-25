@@ -1,6 +1,7 @@
 import type { Product } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
+import { getStockCategory, stockFilters } from "@/utils/stock";
 
 type ProductCardProps = Pick<
   Product,
@@ -10,7 +11,6 @@ type ProductCardProps = Pick<
   | "thumbnail"
   | "brand"
   | "category"
-  | "availabilityStatus"
   | "stock"
   | "price"
 > & {
@@ -24,22 +24,19 @@ export default function ProductCard({
   thumbnail,
   brand,
   category,
-  availabilityStatus,
   stock,
   price,
-  //onDelete,
+  // onDelete,
 }: ProductCardProps) {
-  const availabilityColor: string =
-    availabilityStatus === "In Stock"
+  const stockCategory = getStockCategory(stock);
+  const stockLabel = stockFilters[stockCategory];
+
+  const availabilityColor =
+    stockCategory === "instock"
       ? "text-green-500"
-      : availabilityStatus === "Low Stock"
+      : stockCategory === "lowstock"
         ? "text-orange-500"
         : "text-red-500";
-
-  //const handleDeleteClick = () => {
-  //  console.info("Deleting item: ", title);
-  //  //onDelete(sku || "");
-  //};
 
   return (
     <article className="product-table-grid | bg-white">
@@ -60,7 +57,7 @@ export default function ProductCard({
       <p className="text-left">{category?.name}</p>
       <p className="text-right">
         <span className={`font-semibold ${availabilityColor}`}>
-          {availabilityStatus}
+          {stockLabel}
         </span>{" "}
         (<span>{stock}</span>)
       </p>

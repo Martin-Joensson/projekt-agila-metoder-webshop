@@ -4,17 +4,18 @@ import { useRouter, useSearchParams } from "next/navigation";
 import type { Category } from "@/types";
 import { ChangeEvent } from "react";
 import { updateFilter } from "../utils/updateFilter";
+import type { StockFilter } from "../utils/stock";
+
 type SearchProps = {
   categories: Category[];
-  stock: string[];
+  stock: Record<StockFilter, string>;
 };
 
 export const SearchBar = ({ categories, stock }: SearchProps) => {
   const searchParams = useSearchParams();
-
-  const category = searchParams.get("category");
-  const stockParam = searchParams.get("stock");
   const router = useRouter();
+  const category = searchParams.get("category") ?? "";
+  const stockParam = searchParams.get("stock") ?? "";
 
   function changeFilter(
     event: ChangeEvent<HTMLSelectElement>,
@@ -25,6 +26,7 @@ export const SearchBar = ({ categories, stock }: SearchProps) => {
       filter,
       event.currentTarget.value,
     );
+    params.delete("page");
 
     router.replace(`/?${params.toString()}`);
   }
@@ -47,7 +49,7 @@ export const SearchBar = ({ categories, stock }: SearchProps) => {
         <select
           id="category-filter"
           className="w-full sm:w-auto p-2 border border-gray-300 hover:bg-gray-200 active:bg-gray-300 rounded-md"
-          value={category ?? ""}
+          value={category}
           onChange={(event) => changeFilter(event, "category")}
         >
           <option value="">All categories</option>
@@ -63,24 +65,24 @@ export const SearchBar = ({ categories, stock }: SearchProps) => {
         </label>
         <select
           id="stock-filter"
-          className="w-full sm:w-auto p-2 border border-gray-300  hover:bg-gray-200 active:bg-gray-300 rounded-md"
-          value={stockParam ?? ""}
+          className="w-full sm:w-auto p-2 border border-gray-300 hover:bg-gray-200 active:bg-gray-300 rounded-md"
+          value={stockParam}
           onChange={(event) => changeFilter(event, "stock")}
         >
           <option value="">All Stock</option>
 
-          {stock.map((status) => (
-            <option key={status} value={status}>
-              {status}
+          {Object.entries(stock).map(([value, label]) => (
+            <option key={value} value={value}>
+              {label}
             </option>
           ))}
         </select>
 
         <button
           type="submit"
-          className="w-full bg-indigo-500 text-white sm:w-auto flex items-center gap-1 p-2 border border-gray-300  rounded-md hover:bg-indigo-900 active:translate-y-px"
+          className="w-full bg-indigo-500 text-white sm:w-auto flex items-center gap-1 p-2 border border-gray-300 rounded-md hover:bg-indigo-900 active:translate-y-px"
         >
-          <span className="material-symbols material-symbols-filled ">
+          <span className="material-symbols material-symbols-filled">
             Filter_alt
           </span>
           <span>Search</span>

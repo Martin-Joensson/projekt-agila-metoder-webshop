@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { updateFilter } from "../utils/updateFilter";
 
 type FilterCardProps = {
-  category: string;
+  category: "products" | "instock" | "lowstock" | "outofstock";
   value: number;
 };
 
@@ -40,21 +40,16 @@ export const FilterCard = ({
 
   const filterValues = {
     products: "",
-    instock: "In Stock",
-    lowstock: "Low Stock",
-    outofstock: "Out of Stock",
+    instock: "instock",
+    lowstock: "lowstock",
+    outofstock: "outofstock",
   } as const;
 
-  const config =
-    categoryConfig[category as keyof typeof categoryConfig] ??
-    categoryConfig.products;
+  const config = categoryConfig[category];
 
   function handleClick() {
-    const params = updateFilter(
-      searchParams,
-      "stock",
-      filterValues[category as keyof typeof filterValues],
-    );
+    const params = updateFilter(searchParams, "stock", filterValues[category]);
+    params.delete("page");
 
     router.replace(`/?${params.toString()}`);
   }

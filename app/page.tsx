@@ -1,11 +1,13 @@
 import { FilterCard } from "./components/FilterCard";
 import type { Category, ProductsResponse } from "./types";
 import { ProductList } from "@/components/ProductList";
-import { SearchBar } from "./components/SearchBar";
-import { Pagination } from "./components/Pagination";
+import { SearchBar } from "@/components/SearchBar";
+import { Pagination } from "@/components/Pagination";
+import { getStockCategory, stockFilters } from "./utils/stock";
 
 const API_URL = "http://localhost:4000";
-const defaultLimit = "6";
+const defaultLimit = 6;
+
 export default async function Home({
   searchParams,
 }: {
@@ -17,9 +19,6 @@ export default async function Home({
     (res) => res.json(),
   );
 
-  const stock = ["In Stock", "Low Stock", "Out of Stock"];
-
-  //Additional fetch for statistics basically.
   const { products: allProducts }: ProductsResponse = await fetch(
     `${API_URL}/products`,
   ).then((res) => res.json());
@@ -31,60 +30,85 @@ export default async function Home({
   const {
     page: currentPage = "1",
     category: categorySlug = "",
-    stock: stockStatus = "",
+    stock: stockFilter = "",
   } = await searchParams;
-
-  const urlParams = new URLSearchParams();
-  urlParams.set("page", currentPage);
-  urlParams.set("category", categorySlug);
-  urlParams.set("stock", stockStatus);
 
   const selectedCategory = categories.find(
     (category) => category.slug === categorySlug,
   );
 
-  const query = new URLSearchParams({
-    _page: String(currentPage),
-    _limit: defaultLimit,
-    _sort: "id",
-    _order: "desc",
-  });
+  // Filter all products first
+  let filteredProducts = allProducts;
 
   if (selectedCategory) {
-    query.set("categoryId", String(selectedCategory.id));
+    filteredProducts = filteredProducts.filter(
+      (product) => product.categoryId === selectedCategory.id,
+    );
   }
 
-  if (stockStatus) {
-    query.set("availabilityStatus", stockStatus);
+  if (
+    stockFilter === "instock" ||
+    stockFilter === "lowstock" ||
+    stockFilter === "outofstock"
+  ) {
+    filteredProducts = filteredProducts.filter(
+      (product) => getStockCategory(product.stock) === stockFilter,
+    );
   }
 
-  const { products, total, page, pages, limit }: ProductsResponse = await fetch(
-    `${API_URL}/products/?${query.toString()}`,
-  ).then((res) => res.json());
+  // Sort
+  filteredProducts = [...filteredProducts].sort((a, b) => b.id - a.id);
 
-  // Change to "availabilityStatus": "Low Stock", "In Stock", "Out of Stock"
+  // Pagination
+  const page = Number(currentPage);
+  const limit = defaultLimit;
+  const total = filteredProducts.length;
+  const pages = Math.ceil(total / limit);
 
-  const inStock = allProducts.filter((product) =>
-    (product.availabilityStatus ?? "").toLowerCase().includes("in stock"),
+  const start = (page - 1) * limit;
+  const products = filteredProducts.slice(start, start + limit);
+
+  // URL params for pagination
+  const urlParams = new URLSearchParams();
+
+  if (categorySlug) {
+    urlParams.set("category", categorySlug);
+  }
+
+  if (stockFilter) {
+    urlParams.set("stock", stockFilter);
+  }
+
+  // Statistics
+  const inStock = allProducts.filter(
+    (product) => getStockCategory(product.stock) === "instock",
   );
-  const lowStock = allProducts.filter((product) =>
-    (product.availabilityStatus ?? "").toLowerCase().includes("low stock"),
+
+  const lowStock = allProducts.filter(
+    (product) => getStockCategory(product.stock) === "lowstock",
   );
-  const outOfStock = allProducts.filter((product) =>
-    (product.availabilityStatus ?? "").toLowerCase().includes("out of stock"),
+
+  const outOfStock = allProducts.filter(
+    (product) => getStockCategory(product.stock) === "outofstock",
   );
 
   return (
     <main className="max-w-7xl w-full mx-auto p-4 flex flex-col gap-4">
       <div className="flex flex-col sm:flex-row gap-2">
         <FilterCard category="products" value={allProducts.length} />
+
         <FilterCard category="instock" value={inStock.length} />
+
         <FilterCard category="lowstock" value={lowStock.length} />
+
         <FilterCard category="outofstock" value={outOfStock.length} />
       </div>
-      <SearchBar categories={categories} stock={stock} />
+
+      <SearchBar categories={categories} stock={stockFilters} />
+
       <section className="rounded-lg border-gray-300 border overflow-hidden">
         <ProductList products={products} />
+
         <Pagination
           page={page}
           pages={pages}
