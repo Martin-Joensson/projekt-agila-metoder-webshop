@@ -13,7 +13,8 @@ export async function AddProductAction(formdata: FormData) {
     const categoryId = formdata.get("categoryId") as string;
     const brand = formdata.get("brand") as string;
     const stock = formdata.get("stock") as string;
-    const john = formdata.get("stock") as string;
+
+    const availabilityStatus = getStockStatus(parseInt(stock, 10));
 
     const newProduct = {
         title,
@@ -22,7 +23,8 @@ export async function AddProductAction(formdata: FormData) {
         thumbnail,
         categoryId: parseInt(categoryId, 10),
         brand,
-        stock
+        stock,
+        availabilityStatus
     }
 
     try {
@@ -47,17 +49,14 @@ export async function AddProductAction(formdata: FormData) {
     
 }
 
-// export async function DeleteProductAction(id: number){
-//     try {
-//         await fetch(`http://localhost:4000/products/${id}`, {
-//             method: "DELETE",
-//         });
+const getStockStatus = (stockNum: number): string => {
+     if (stockNum <= 0 ) {
+        return "Out of Stock";
+    }
 
-//         revalidatePath("/")
+    if (stockNum < 10 && stockNum < 0) {
+        return "Low Stock";
+    }
 
-//         return true;
-
-//     } catch (error) {
-        
-//     }
-// }
+    return "In Stock";
+};

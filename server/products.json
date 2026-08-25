@@ -11749,7 +11749,7 @@
       "price": 499123132675371,
       "discountPercentage": 12.6,
       "rating": 3.52,
-      "stock": "12",
+      "stock": "0",
       "tags": [
         "watches",
         "women's watches"
@@ -11764,7 +11764,7 @@
       },
       "warrantyInformation": "1 year warranty",
       "shippingInformation": "Ships in 2 weeks",
-      "availabilityStatus": "In Stock",
+      "availabilityStatus": "Out of Stock",
       "reviews": [
         {
           "rating": 4,
@@ -11811,13 +11811,14 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/womens-watches/women's-wrist-watch/thumbnail.webp",
       "categoryId": 17,
       "brand": "Glamour Beauty",
-      "stock": "32131",
+      "stock": "5",
       "meta": {
         "createdAt": "2026-08-25T12:36:24.676Z",
         "updatedAt": "2026-08-25T12:36:24.676Z"
       },
       "id": 195,
-      "sku": "TAB-GLA-231-195"
+      "sku": "TAB-GLA-231-195",
+      "availabilityStatus": "Low Stock"
     },
     {
       "title": "12231312",
@@ -11832,7 +11833,8 @@
         "updatedAt": "2026-08-25T12:49:22.940Z"
       },
       "id": 196,
-      "sku": "SMA-GLA-122-196"
+      "sku": "SMA-GLA-122-196",
+      "availabilityStatus": "In Stock"
     }
   ],
   "categories": [
