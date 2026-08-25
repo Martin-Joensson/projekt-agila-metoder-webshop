@@ -36,10 +36,18 @@ export default async function Home({
   } = await searchParams;
 
   const urlParams = new URLSearchParams();
-  urlParams.set("page", currentPage);
-  urlParams.set("category", categorySlug);
-  urlParams.set("stock", stockStatus);
-  urlParams.set("search", search);
+  if (currentPage) {
+    urlParams.set("page", currentPage);
+  }
+  if (categorySlug) {
+    urlParams.set("category", categorySlug);
+  }
+  if (stockStatus) {
+    urlParams.set("stock", stockStatus);
+  }
+  if (search) {
+    urlParams.set("search", search);
+  }
 
   const selectedCategory = categories.find(
     (category) => category.slug === categorySlug,
@@ -55,11 +63,9 @@ export default async function Home({
   if (selectedCategory) {
     query.set("categoryId", String(selectedCategory.id));
   }
-
   if (stockStatus) {
     query.set("availabilityStatus", stockStatus);
   }
-
   if (search) {
     query.set("title_like", search);
   }
