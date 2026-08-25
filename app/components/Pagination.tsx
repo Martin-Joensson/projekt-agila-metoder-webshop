@@ -1,9 +1,17 @@
 import { ProductsResponse } from "@/types";
 import Link from "next/link";
 
-type PaginationProps = Omit<ProductsResponse, "products">;
+type PaginationProps = Omit<ProductsResponse, "products"> & {
+  urlParams: URLSearchParams;
+};
 
-export const Pagination = ({ page, pages }: PaginationProps) => {
+export const Pagination = ({ page, pages, urlParams }: PaginationProps) => {
+  const getPageUrl = (pageNumber: number) => {
+    urlParams.set("page", String(pageNumber));
+
+    return `?${urlParams.toString()}`;
+  };
+
   const start = Math.max(2, page - 2);
   const end = Math.min(pages - 1, page + 2);
 
@@ -19,7 +27,7 @@ export const Pagination = ({ page, pages }: PaginationProps) => {
   return (
     <nav className="bg-neutral-50 py-4 flex gap-2 text-neutral-500 justify-center items-center">
       <Link
-        href={page > 1 ? `?page=${page - 1}` : "#"}
+        href={page > 1 ? getPageUrl(page - 1) : "#"}
         aria-disabled={page === 1}
         className={`${buttonStyle} flex items-center justify-center ${
           page === 1 ? "pointer-events-none opacity-50" : ""
@@ -32,7 +40,7 @@ export const Pagination = ({ page, pages }: PaginationProps) => {
 
       <div className="flex justify-center gap-2">
         <Link
-          href="?page=1"
+          href={getPageUrl(1)}
           className={`${buttonStyle} flex items-center justify-center ${
             page === 1 ? "bg-neutral-500 text-white" : "bg-white"
           }`}
@@ -47,7 +55,7 @@ export const Pagination = ({ page, pages }: PaginationProps) => {
         {visiblePages.map((pageNr) => (
           <Link
             key={pageNr}
-            href={`?page=${pageNr}`}
+            href={getPageUrl(pageNr)}
             className={`${buttonStyle} flex items-center justify-center ${
               pageNr === page ? "bg-neutral-500 text-white" : "bg-white"
             }`}
@@ -62,7 +70,7 @@ export const Pagination = ({ page, pages }: PaginationProps) => {
 
         {pages > 1 && (
           <Link
-            href={`?page=${pages}`}
+            href={getPageUrl(pages)}
             className={`${buttonStyle} flex items-center justify-center ${
               page === pages ? "bg-neutral-500 text-white" : "bg-white"
             }`}
@@ -73,7 +81,7 @@ export const Pagination = ({ page, pages }: PaginationProps) => {
       </div>
 
       <Link
-        href={page < pages ? `?page=${page + 1}` : "#"}
+        href={page < pages ? getPageUrl(page + 1) : "#"}
         aria-disabled={page === pages}
         className={`${buttonStyle} flex items-center justify-center ${
           page === pages ? "pointer-events-none opacity-50" : ""

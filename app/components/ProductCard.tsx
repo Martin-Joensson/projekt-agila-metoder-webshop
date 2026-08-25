@@ -27,7 +27,7 @@ export default function ProductCard({
   availabilityStatus,
   stock,
   price,
-  onDelete,
+  //onDelete,
 }: ProductCardProps) {
   const availabilityColor: string =
     availabilityStatus === "In Stock"
@@ -36,10 +36,10 @@ export default function ProductCard({
         ? "text-orange-500"
         : "text-red-500";
 
-  const handleDeleteClick = () => {
-    console.info("Deleting item: ", title);
-    //onDelete(sku || "");
-  };
+  //const handleDeleteClick = () => {
+  //  console.info("Deleting item: ", title);
+  //  //onDelete(sku || "");
+  //};
 
   return (
     <article className="product-table-grid | bg-white">

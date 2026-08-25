@@ -1,34 +1,77 @@
 import { FilterCard } from "./components/FilterCard";
-import type { Product, ProductsResponse } from "./types";
+import type { Category, ProductsResponse } from "./types";
 import { ProductList } from "@/components/ProductList";
 import { SearchBar } from "./components/SearchBar";
+import { Pagination } from "./components/Pagination";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
-export default async function Home({searchParams} :{
-  searchParams: Promise<{[key: string]: string | string[] | undefined}> ;
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    [key: string]: string | undefined;
+  }>;
 }) {
+  const categories: Category[] = await fetch(`${API_URL}/categories`).then(
+    (res) => res.json(),
+  );
+
+  const stock = ["In Stock", "Low Stock", "Out of Stock"];
 
   //Additional fetch for statistics basically.
   const { products: allProducts }: ProductsResponse = await fetch(
-    `${API_URL}/products/?_sort=id&_order=desc&_expand=category`,
+    `${API_URL}/products`,
   ).then((res) => res.json());
 
   // we use the fetch() method to get the products from the API
   // in this fetch we sort using _sort and _order and we limit the number of products using _limit
   // we also use _expand to get the relational category data
   // we can use the other destructed variables like page, total and so on to create pagination or show info
-  const { page:currentPage = "1" } =  await searchParams;
+  const {
+    page: currentPage = "1",
+    category: categorySlug = "",
+    stock: stockStatus = "",
+  } = await searchParams;
+
+  const urlParams = new URLSearchParams();
+  urlParams.set("page", currentPage);
+  urlParams.set("category", categorySlug);
+  urlParams.set("stock", stockStatus);
+
+  const selectedCategory = categories.find(
+    (category) => category.slug === categorySlug,
+  );
+
+  const query = new URLSearchParams({
+    _page: String(currentPage),
+    _limit: defaultLimit,
+    _sort: "id",
+    _order: "desc",
+  });
+
+  if (selectedCategory) {
+    query.set("categoryId", String(selectedCategory.id));
+  }
+
+  if (stockStatus) {
+    query.set("availabilityStatus", stockStatus);
+  }
+
   const { products, total, page, pages, limit }: ProductsResponse = await fetch(
-    `${API_URL}/products/?_page=${currentPage}&_limit=${defaultLimit}&_sort=id&_order=desc&_expand=category`,
+    `${API_URL}/products/?${query.toString()}`,
   ).then((res) => res.json());
 
-  const inStock = allProducts.filter((product) => (product.stock ?? 0) >= 10);
-  const lowStock = allProducts.filter(
-    (product) => (product.stock ?? 0) > 0 && (product.stock ?? 0) < 10,
+  // Change to "availabilityStatus": "Low Stock", "In Stock", "Out of Stock"
+
+  const inStock = allProducts.filter((product) =>
+    (product.availabilityStatus ?? "").toLowerCase().includes("in stock"),
   );
-  const outOfStock = allProducts.filter(
-    (product) => (product.stock ?? 0) === 0,
+  const lowStock = allProducts.filter((product) =>
+    (product.availabilityStatus ?? "").toLowerCase().includes("low stock"),
+  );
+  const outOfStock = allProducts.filter((product) =>
+    (product.availabilityStatus ?? "").toLowerCase().includes("out of stock"),
   );
 
   return (
@@ -39,14 +82,17 @@ export default async function Home({searchParams} :{
         <FilterCard category="lowstock" value={lowStock.length} />
         <FilterCard category="outofstock" value={outOfStock.length} />
       </div>
-      <SearchBar />
-      <ProductList
-        products={products}
-        page={page}
-        pages={pages}
-        total={total}
-        limit={limit}
-      />
+      <SearchBar categories={categories} stock={stock} />
+      <section className="rounded-lg border-gray-300 border overflow-hidden">
+        <ProductList products={products} />
+        <Pagination
+          page={page}
+          pages={pages}
+          total={total}
+          limit={limit}
+          urlParams={urlParams}
+        />
+      </section>
     </main>
   );
 }
