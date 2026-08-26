@@ -4,12 +4,12 @@ export default function Banner() {
   return (
     <header className="px-4 bg-white border-b border-gray-300">
       <div className="max-w-7xl w-full mx-auto flex justify-between py-4">
-        <div>
+        <Link href={"/"}>
           <h1 className="text-xl font-bold text-black">Inventory Management</h1>
           <p className="hidden md:block text-gray-400">
             Manage and track your global product catalogue across all categories
           </p>
-        </div>
+        </Link>
 
         <Link
           href={"add-product"}

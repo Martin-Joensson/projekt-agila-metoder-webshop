@@ -49,14 +49,14 @@ export const ProductForm = async ({
   };
 
   return (
-    <article className="flex flex-col m-auto max-w-7xl items-center">
-      <h2 className="text-2xl">
+    <article className="flex flex-col m-auto max-w-7xl w-full p-4 items-center">
+      <h2 className="text-2xl py-4">
         {productId !== undefined ? "Edit Product" : "Add Product"}
       </h2>
       <form
         key={product.id}
         method="get"
-        className="flex flex-col gap-4 items-start max-w-2xl m-auto"
+        className="flex flex-col gap-4 items-start max-w-2xl w-full "
       >
         {productId !== undefined && (
           <input type="hidden" name="productId" value={productId} />
@@ -66,7 +66,7 @@ export const ProductForm = async ({
           <input
             id="product-name"
             type="text"
-            className="border p-1 "
+            className="border p-1 bg-neutral-50"
             name="title"
             defaultValue={getValue("title", product.title)}
             placeholder="Enter product title"
@@ -81,7 +81,7 @@ export const ProductForm = async ({
             defaultValue={getValue("description", product.description)}
             placeholder="Enter description"
             required
-            className="w-full min-w-2xl min-h-8 field-sizing-content resize-none rounded border p-2"
+            className="w-full min-h-8 field-sizing-content resize-none rounded border p-2 bg-neutral-50"
           />
         </div>
         <div className="flex flex-col w-full">
@@ -93,11 +93,11 @@ export const ProductForm = async ({
             defaultValue={getValue("thumbnail", product.thumbnail)}
             placeholder="Enter thumbnail"
             required
-            className="border p-1 rounded"
+            className="border p-1 rounded bg-neutral-50"
           />
         </div>
-        <div className="flex w-full">
-          <div className="flex flex-col">
+        <div className="flex flex-col sm:flex-row w-full justify-between gap-4 ">
+          <div className="flex flex-col flex-1 ">
             <label htmlFor="product-price">Price:</label>
             <input
               id="product-price"
@@ -106,10 +106,10 @@ export const ProductForm = async ({
               defaultValue={getValue("price", product.price)}
               placeholder="Enter price"
               required
-              className="border  h-8 p-1 rounded"
+              className="border h-8 p-1 rounded bg-neutral-50"
             />
           </div>
-          <div className="flex flex-col m-auto">
+          <div className="flex flex-col flex-1">
             <label htmlFor="product-brand">Brand</label>
             <input
               id="product-brand"
@@ -118,17 +118,17 @@ export const ProductForm = async ({
               defaultValue={getValue("brand", product.brand ?? "")}
               placeholder="Enter brand"
               required
-              className="border  h-8 p-1 rounded"
+              className="border h-8 p-1 rounded bg-neutral-50"
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col flex-1">
             <label htmlFor="product-category">Category</label>
             <select
               id="product-category"
               name="categoryId"
               defaultValue={getValue("categoryId", product.categoryId)}
               required
-              className="border h-8 rounded"
+              className="border h-8 p-1 rounded bg-neutral-50"
             >
               <option value={0} disabled>
                 Select a category
@@ -142,7 +142,7 @@ export const ProductForm = async ({
           </div>
         </div>
         <button
-          className="bg-amber-500 w-fit m-auto p-2 mbs-3 rounded-xl hover:bg-amber-800 ease-in duration-200 cursor-pointer"
+          className="bg-amber-500 w-fit m-auto py-2 px-4 mbs-3 rounded-xl hover:bg-amber-700 hover:text-white ease-in duration-100 cursor-pointer"
           type="submit"
         >
           Submit
