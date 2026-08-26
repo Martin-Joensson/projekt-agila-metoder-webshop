@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import type { Category } from "@/types";
-import { ChangeEvent } from "react";
+import { ChangeEvent, Suspense } from "react";
 import { updateFilter } from "../utils/updateFilter";
 import Search from "@/components/Search";
 
@@ -41,7 +41,9 @@ export const SearchBar = ({ categories, stock }: SearchProps) => {
         onSubmit={(e) => handleSubmit(e)}
         className="flex items-center flex-col sm:flex-row bg-white rounded-lg border border-gray-300 p-5 gap-4"
       >
-        <Search />
+        <Suspense>
+          <Search />
+        </Suspense>
 
         <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-4">
           <label htmlFor="category-filter" className="sr-only">
