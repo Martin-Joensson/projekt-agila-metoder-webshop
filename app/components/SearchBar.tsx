@@ -30,23 +30,23 @@ export const SearchBar = ({ categories, stock }: SearchProps) => {
   }
 
   return (
-    <form className="flex items-center flex-col sm:flex-row bg-white rounded-lg border border-gray-300 p-5 gap-4">
+    <form className="flex items-center flex-col md:flex-row bg-white rounded-lg border border-gray-300 p-5 gap-4">
       <label htmlFor="search-product" className="sr-only">
         Search for product:
       </label>
       <input
         id="search-product"
         placeholder="Search products..."
-        className="w-full sm:w-auto flex-1 px-3 py-2 border border-gray-300 rounded-md"
+        className="w-full md:w-auto flex-1 px-3 py-2 border border-gray-300 rounded-md"
       />
 
-      <div className="w-full sm:w-auto flex flex-col sm:flex-row gap-4">
+      <div className="w-full md:w-auto flex flex-col sm:flex-row gap-4">
         <label htmlFor="category-filter" className="sr-only">
           Filter by category:
         </label>
         <select
           id="category-filter"
-          className="w-full sm:w-auto p-2 border border-gray-300 hover:bg-gray-200 active:bg-gray-300 rounded-md"
+          className="w-full md:w-auto p-2 border border-gray-300 hover:bg-gray-200 active:bg-gray-300 rounded-md"
           value={category ?? ""}
           onChange={(event) => changeFilter(event, "category")}
         >
@@ -63,7 +63,7 @@ export const SearchBar = ({ categories, stock }: SearchProps) => {
         </label>
         <select
           id="stock-filter"
-          className="w-full sm:w-auto p-2 border border-gray-300  hover:bg-gray-200 active:bg-gray-300 rounded-md"
+          className="w-full md:w-auto p-2 border border-gray-300  hover:bg-gray-200 active:bg-gray-300 rounded-md"
           value={stockParam ?? ""}
           onChange={(event) => changeFilter(event, "stock")}
         >

@@ -63,7 +63,7 @@ export const FilterCard = ({
     <button
       type="button"
       onClick={handleClick}
-      className="bg-white flex-1 flex flex-col gap-3 p-4 rounded-lg border hover:border-cyan-400 hover:bg-neutral-50 duration-200 border-gray-300 text-left"
+      className="bg-white flex-1 flex flex-col gap-3 p-4 rounded-lg border hover:border-indigo-400 hover:bg-neutral-50 duration-200 border-gray-300 text-left"
     >
       <p className="text-gray-500 text-sm font-bold">
         {config.label.toUpperCase()}
