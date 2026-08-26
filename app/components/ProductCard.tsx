@@ -33,7 +33,7 @@ export default function ProductCard({
     availabilityStatus === "In Stock"
       ? "text-green-500"
       : availabilityStatus === "Low Stock"
-        ? "text-orange-500"
+        ? "text-amber-500"
         : "text-red-500";
 
   //const handleDeleteClick = () => {

@@ -29,7 +29,7 @@ export const FilterCard = ({
     lowstock: {
       label: "low stock",
       icon: "warning",
-      color: "text-orange-500",
+      color: "text-amber-500",
     },
     outofstock: {
       label: "out of stock",

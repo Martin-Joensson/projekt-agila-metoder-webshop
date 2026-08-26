@@ -142,7 +142,7 @@ export const ProductForm = async ({
           </div>
         </div>
         <button
-          className="bg-amber-500 w-fit m-auto py-2 px-4 mbs-3 rounded-xl hover:bg-amber-700 hover:text-white ease-in duration-100 cursor-pointer"
+          className="bg-amber-500 w-fit m-auto py-2 px-4 mbs-3 rounded-xl hover:bg-white border-2 border-amber-500  ease-in duration-100 cursor-pointer"
           type="submit"
         >
           Submit
