@@ -18,3 +18,16 @@ export function isValidRegExp(pattern: string): boolean {
   }
   return true;
 }
+
+export function createUrlSearchParams(searchParams: {
+  [key: string]: string | undefined;
+}): URLSearchParams {
+  const urlParams = new URLSearchParams();
+  Object.entries(searchParams).map((entry) => {
+    const [key, value] = entry;
+    if (value) {
+      urlParams.set(key, value);
+    }
+  });
+  return urlParams;
+}
