@@ -2,14 +2,6 @@ import { Product } from "@/types";
 import ProductCard from "./ProductCard";
 
 export const ProductList = ({ products }: { products: Product[] }) => {
-  /* Removed delete functionality for now as it was not really helping and causing issues */
-  //const [productsState, setProductsState] = useState<Product[]>(initialProducts);
-
-  //  const handleDeleteProduct = (sku: string) => {
-  //    console.log("One day I'll be useful")
-  //    //setProducts((prev) => prev.filter((p) => p.sku !== sku));
-  //  };
-
   return (
     <ul className="bg-neutral-50">
       <div className="product-table-grid font-semibold text-neutral-500 text-sm py-4">
