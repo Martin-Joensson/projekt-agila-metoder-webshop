@@ -3,11 +3,13 @@
   alt="Screenshot av applikationen"
   width="60"
 />
+
 # Webshop
 
 This is a group project for the frontend education with Lexicon. The main thrust of this project is to practice developing a product using an Agile development process.
 
 ---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 This project uses [json-server](https://github.com/typicode/json-server/tree/v0.17.4) to mock a backend API.
@@ -16,27 +18,29 @@ Data in the json for the server is from [dummyjson.com](https://dummyjson.com/do
 
 ## Technologies
 
-| Technology | Used for |
-|------------|----------|
-| Next.js | User interface & Server Components|
-| TypeScript | Type safety |
-| Tailwind | Styling |
-| Mock-API | Product Library  |
-| Github Project | Sprint dashboard |
-
+| Technology     | Used for                           |
+| -------------- | ---------------------------------- |
+| Next.js        | User interface & Server Components |
+| TypeScript     | Type safety                        |
+| Tailwind       | Styling                            |
+| Mock-API       | Product Library                    |
+| Github Project | Sprint dashboard                   |
 
 ## Getting Started
 
 First, install the dependencies:
 
 ## Installation
+
 To view the webshop page, clone the repo, install dependencies and run a local development server.
+
 ```bash
 git clone git@github.com:Martin-Joensson/projekt-agila-metoder-webshop.git
 cd projekt-agila-metoder-webshop
 npm install
 npm run dev:full
 ```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 The JSON server is running on [http://localhost:4000](http://localhost:4000). Here you can see the API endpoints and test them.
@@ -48,16 +52,16 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 ### Completed
 
 - [x] Visual interface for product list view
+- [x] Functional pagination for product lists
+- [x] API calls to mock server (`json-server`)
+- [x] Add product functionality
+- [x] Edit product functionality
+- [x] Error handling / loading states
+- [x] Responsive UI
 
 ### Planned
 
-- [ ] Functional pagination for product lists
-- [ ] API calls to mock server (`json-server`)
-- [ ] Add product functionality
-- [ ] Edit product functionality
-- [ ] View product details
-- [ ] Error handling / loading states
-- [ ] Responsive UI
+- All planned features are completed
 
 ## Project Structure
 
@@ -69,6 +73,7 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 - `server/`
   - `products.json` - mock database for json-server
   - `middleware.js` - custom middleware for API responses
+- `actions.ts` - API related actions
 - `package.json` - scripts and dependencies
 - `tsconfig.json` - TypeScript configuration
 - `next.config.mjs` - Next.js config
@@ -98,7 +103,7 @@ The mock server (running on port 4000) provides the following endpoints:
 
 ### Resources
 
-- `GET /products`: Get all products
+- `GET/ /products`: Get all products
 - `GET /products/:id`: Get a single product by ID
 - `GET /categories`: Get all categories
 - `GET /categories/:id`: Get a category by ID
@@ -107,6 +112,10 @@ The mock server (running on port 4000) provides the following endpoints:
 ### Create Product
 
 - `POST /products`: Create a new product
+
+### Delete Product
+
+- `DELETE /products/:id`: Removes a product from the json file.
 
 **Required Fields:**
 
@@ -158,6 +167,7 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 ## Authors
+
 - Gabriel Gaglianone ([@Amuga](https://github.com/Amuga))
 - Martin Jönsson ([@Martin-Joensson](https://github.com/Martin-Joensson))
 - Tomas Savela ([@f0jzd](https://github.com/f0jzd))
