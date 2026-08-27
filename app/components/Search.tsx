@@ -57,8 +57,7 @@ function validate(term: string): { success: boolean; message: string } {
   if (!isValidRegExp(term)) {
     return {
       success: false,
-      message:
-        "Enter a valid regular expression or avoid using special characters.",
+      message: "Invalid regular expression.",
     };
   }
   return { success: true, message: "" };
