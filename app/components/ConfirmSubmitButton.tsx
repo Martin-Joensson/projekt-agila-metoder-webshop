@@ -1,12 +1,14 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { Modal } from "@/components/Modal";
 import Link from "next/link";
 
 export function ConfirmSubmitButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const formRef = useRef<HTMLFormElement | null>(null);
+  const router = useRouter();
 
   const confirmSubmit = () => {
     const form = formRef.current;
@@ -17,9 +19,14 @@ export function ConfirmSubmitButton() {
       return;
     }
 
-    setIsModalOpen(false);
-    form.requestSubmit();
+    startTransition(async () => {
+      setIsModalOpen(false);
+      form.requestSubmit();
+      router.push("/");
+    });
   };
+
+  const [isPending, startTransition] = useTransition();
 
   return (
     <>
@@ -49,6 +56,8 @@ export function ConfirmSubmitButton() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onConfirm={confirmSubmit}
+        isPending={isPending}
+        pendingText="Saving product..."
         title="Confirm product"
       >
         Are you sure you want to submit this product?
