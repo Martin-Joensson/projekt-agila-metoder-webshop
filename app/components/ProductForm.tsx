@@ -157,13 +157,7 @@ export const ProductForm = async ({ productId }: ProductFormProps) => {
         </div>
         <div className="flex m-auto gap-5">
           <ConfirmSubmitButton />
-          <button
-            className="bg-red-500 w-fit m-auto p-2 mbs-3 rounded-xl hover:bg-red-800 ease-in duration-200 cursor-pointer"
-            type="button"
-            onClick={CancelButton}
-          >
-            Cancel
-          </button>
+          <CancelButton />
         </div>
       </form>
     </article>

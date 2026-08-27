@@ -2,8 +2,7 @@
 
 import { useRef, useState } from "react";
 import { Modal } from "@/components/Modal";
-import { useFormStatus } from "react-dom";
-import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export function ConfirmSubmitButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,30 +58,12 @@ export function ConfirmSubmitButton() {
 }
 
 export function CancelButton() {
-  redirect("/");
-}
-
-export default function SaveButton() {
-  const { pending } = useFormStatus();
-
   return (
-    <button
-      className="flex items-center justify-center gap-2 border rounded-lg py-2 px-4 bg-accent border-neutral-200 cursor-pointer hover:bg-warning transition-colors"
-      type="submit"
-      disabled={pending}
-      aria-busy={pending}
+    <Link
+      className="bg-slate-200 w-fit m-auto p-2 mbs-3 rounded-xl hover:bg-slate-300 ease-in duration-200 cursor-pointer"
+      href="/"
     >
-      {pending ? (
-        <>
-          <span
-            className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent"
-            aria-hidden="true"
-          />
-          <span>Saving...</span>
-        </>
-      ) : (
-        "Save"
-      )}
-    </button>
+      Cancel
+    </Link>
   );
 }
