@@ -1,7 +1,7 @@
 import { ProductsResponse } from "@/types";
 import Link from "next/link";
 
-type PaginationProps = Omit<ProductsResponse, "products"> & {
+type PaginationProps = Omit<ProductsResponse, "products" | "stats"> & {
   urlParams: URLSearchParams;
 };
 
