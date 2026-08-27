@@ -19,18 +19,10 @@ export default async function Home({
   );
 
   const stock = ["In Stock", "Low Stock", "Out of Stock"];
-
-  //Additional fetch for statistics basically.
-  const { products: allProducts }: ProductsResponse = await fetch(
-    `${API_URL}/products`,
-  ).then((res) => res.json());
-
-  //Additional fetch for statistics basically.
-  const { total: stockTotal, lowStock, outOfStock, inStock }: Stats = await fetch(
+  
+  const { total: totalStock, lowStock, outOfStock, inStock }: Stats = await fetch(
     `${API_URL}/products/stats`,
   ).then((res) => res.json());
-
-  console.log("Stock Stats: ", stockTotal, lowStock, outOfStock, inStock);
 
   // we use the fetch() method to get the products from the API
   // in this fetch we sort using _sort and _order and we limit the number of products using _limit
@@ -70,22 +62,10 @@ export default async function Home({
     `${API_URL}/products/?${query.toString()}`,
   ).then((res) => res.json());
 
-  // // Change to "availabilityStatus": "Low Stock", "In Stock", "Out of Stock"
-
-  // const inStock = allProducts.filter((product) =>
-  //   (product.availabilityStatus ?? "").toLowerCase().includes("in stock"),
-  // );
-  // const lowStock = allProducts.filter((product) =>
-  //   (product.availabilityStatus ?? "").toLowerCase().includes("low stock"),
-  // );
-  // const outOfStock = allProducts.filter((product) =>
-  //   (product.availabilityStatus ?? "").toLowerCase().includes("out of stock"),
-  // );
-
   return (
     <main className="max-w-7xl w-full mx-auto p-4 flex flex-col gap-4">
       <div className="flex flex-col sm:flex-row gap-2">
-        <FilterCard category="products" value={allProducts.length} />
+        <FilterCard category="products" value={totalStock} />
         <FilterCard category="instock" value={inStock} />
         <FilterCard category="lowstock" value={lowStock} />
         <FilterCard category="outofstock" value={outOfStock} />
