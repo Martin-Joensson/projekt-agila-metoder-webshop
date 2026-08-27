@@ -20,7 +20,7 @@ export async function deleteProduct(id: number) {
   revalidatePath("/");
 }
 
-export async function AddProductAction(formdata: FormData) {
+export async function addProductAction(formdata: FormData) {
 
 
   const getStockStatus = (stockNum: number): string => {
@@ -35,7 +35,7 @@ export async function AddProductAction(formdata: FormData) {
     return "In Stock";
 };
 
-    const API_URL = "http://localhost:4000/products";
+    const PRODUCTS_URL = "http://localhost:4000/products";
     const productId = formdata.get("productId")?.toString();
 
     const title = formdata.get("title") as string;
@@ -60,13 +60,15 @@ export async function AddProductAction(formdata: FormData) {
     }
 
     try {
-        const response = await fetch(productId ? `${API_URL}/${productId}` : API_URL, {
-            method: productId ? "PATCH" : "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(newProduct),
-        });
+      const request = new Request(productId ? `${PRODUCTS_URL}/${productId}` : PRODUCTS_URL, {
+        method: productId ? "PATCH" : "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newProduct),
+      });
+
+      const response = await fetch(request);
 
         if (!response.ok) {
             throw new Error(`API returned ${response.status} ${response.statusText}`);

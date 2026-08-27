@@ -1,4 +1,4 @@
-import { AddProductAction } from "@/actions";
+import { addProductAction } from "@/actions";
 import { Product } from "@/types";
 import {
   CancelButton,
@@ -51,7 +51,7 @@ export const ProductForm = async ({ productId }: ProductFormProps) => {
         {productId !== undefined ? "Edit Product" : "Add Product"}
       </h2>
       <form
-        action={AddProductAction}
+        action={addProductAction}
         key={product.id}
         className="flex flex-col gap-4 items-start max-w-2xl m-auto"
       >
