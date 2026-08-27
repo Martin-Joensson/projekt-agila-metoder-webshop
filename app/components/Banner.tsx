@@ -12,7 +12,7 @@ export default function Banner() {
         </div>
 
         <Link
-          href={"add-product"}
+          href="/add-product"
           className="px-4 flex items-center gap-2 text-white bg-indigo-500 rounded-xl hover:bg-indigo-900 ease-in duration-100"
         >
           <span className="material-symbols text-xl font-bold">add</span>
