@@ -46,14 +46,15 @@ export const ProductForm = async ({ productId }: ProductFormProps) => {
   );
 
   return (
-    <article className="flex flex-col m-auto max-w-7xl items-center">
-      <h2 className="text-2xl">
+    <article className="flex flex-col m-auto max-w-7xl w-full p-4 items-center">
+      <h2 className="text-2xl py-4">
         {productId !== undefined ? "Edit Product" : "Add Product"}
       </h2>
       <form
         action={addProductAction}
         key={product.id}
-        className="flex flex-col gap-4 items-start max-w-2xl m-auto"
+
+        className="flex flex-col gap-4 items-start max-w-2xl w-full "
       >
         {productId !== undefined && (
           <input type="hidden" name="productId" value={productId} />
@@ -63,7 +64,7 @@ export const ProductForm = async ({ productId }: ProductFormProps) => {
           <input
             id="product-name"
             type="text"
-            className="border p-1 "
+            className="border p-1 bg-neutral-50"
             name="title"
             defaultValue={product.title}
             placeholder="Enter product title"
@@ -78,7 +79,7 @@ export const ProductForm = async ({ productId }: ProductFormProps) => {
             defaultValue={product.description}
             placeholder="Enter description"
             required
-            className="w-full min-w-2xl min-h-8 field-sizing-content resize-none rounded border p-2"
+            className="w-full min-h-8 field-sizing-content resize-none rounded border p-2 bg-neutral-50"
           />
         </div>
         <div className="flex flex-col w-full">
@@ -90,12 +91,11 @@ export const ProductForm = async ({ productId }: ProductFormProps) => {
             defaultValue={product.thumbnail}
             placeholder="Enter thumbnail"
             required
-            className="border p-1 rounded"
+            className="border p-1 rounded bg-neutral-50"
           />
         </div>
-
-        <div className="flex w-full justify-center gap-4">
-          <div className="flex flex-col">
+        <div className="flex flex-col sm:flex-row w-full justify-between gap-4 ">
+          <div className="flex flex-col flex-1 ">
             <label htmlFor="product-price">Price:</label>
             <input
               id="product-price"
@@ -104,11 +104,11 @@ export const ProductForm = async ({ productId }: ProductFormProps) => {
               defaultValue={product.price}
               placeholder="Enter price"
               required
-              className="border  h-8 p-1 rounded"
+              className="border h-8 p-1 rounded bg-neutral-50"
             />
           </div>
 
-          <div className="flex flex-col">
+                 <div className="flex flex-col flex-1">
             <label htmlFor="product-stock">Stock:</label>
             <input
               id="product-stock"
@@ -132,17 +132,17 @@ export const ProductForm = async ({ productId }: ProductFormProps) => {
               defaultValue={product.brand ?? ""}
               placeholder="Enter brand"
               required
-              className="border  h-8 p-1 rounded"
+              className="border h-8 p-1 rounded bg-neutral-50"
             />
           </div>
-          <div className="flex flex-col w-52">
+          <div className="flex flex-col flex-1">
             <label htmlFor="product-category">Category</label>
             <select
               id="product-category"
               name="categoryId"
               defaultValue={product.categoryId}
               required
-              className="border h-8 rounded"
+              className="border h-8 p-1 rounded bg-neutral-50"
             >
               <option value={0} disabled>
                 Select a category

@@ -34,7 +34,7 @@ export default function ProductCard({
     availabilityStatus === "In Stock"
       ? "text-green-500"
       : availabilityStatus === "Low Stock"
-        ? "text-orange-500"
+        ? "text-amber-500"
         : "text-red-500";
 
   const [isOpen, setIsOpen] = useState(false);
@@ -57,7 +57,7 @@ export default function ProductCard({
 
   return (
     <article className="product-table-grid | bg-white">
-      <div className="grid grid-cols-[4rem_7fr] items-center gap-x-4">
+      <div className="grid grid-cols-[4rem_7fr] items-center gap-x-4 pbs-4 md:pbs-0">
         <div>
           <h2 className="font-bold">{title}</h2>
           <p className="text-sm text-gray-500">{`SKU: ${sku}`}</p>
@@ -79,17 +79,17 @@ export default function ProductCard({
         (<span>{stock}</span>)
       </p>
       <p className="text-right font-semibold">{euros.format(price)}</p>
-      <div className="flex justify-end text-2xl gap-2">
+      <div className="flex justify-end md:justify-center gap-2 text-2xl  py-4">
         <button
           type="button"
-          className="material-symbols p-1 rounded-lg hover:outline-2"
+          className="material-symbols p-1 text-red-800 rounded-lg hover:outline-2 hover:bg-red-800 hover:text-white"
           onClick={handleDeleteClick}
         >
           delete
         </button>
 
         <Link
-          className="material-symbols p-1 rounded-lg hover:outline-2"
+          className="material-symbols p-1 rounded-lg hover:outline-2 hover:bg-indigo-500 hover:text-white"
           href={`/edit-product/${id}`}
         >
           edit

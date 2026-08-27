@@ -29,7 +29,7 @@ export const Pagination = ({ page, pages, urlParams }: PaginationProps) => {
       <Link
         href={page > 1 ? getPageUrl(page - 1) : "#"}
         aria-disabled={page === 1}
-        className={`${buttonStyle} flex items-center justify-center ${
+        className={`${buttonStyle} flex items-center justify-center bg-white${
           page === 1 ? "pointer-events-none opacity-50" : ""
         }`}
       >
@@ -49,23 +49,29 @@ export const Pagination = ({ page, pages, urlParams }: PaginationProps) => {
         </Link>
 
         {start > 2 && (
-          <span className="flex w-8 items-center justify-center">...</span>
+          <span className="flex w-2 sm:w-8 items-center justify-center">
+            ...
+          </span>
         )}
 
         {visiblePages.map((pageNr) => (
           <Link
             key={pageNr}
             href={getPageUrl(pageNr)}
-            className={`${buttonStyle} flex items-center justify-center ${
-              pageNr === page ? "bg-neutral-500 text-white" : "bg-white"
-            }`}
+            className={`${buttonStyle} items-center justify-center  sm:flex ${
+              pageNr === page
+                ? "bg-neutral-500 text-white flex"
+                : "hidden bg-white"
+            } `}
           >
             {pageNr}
           </Link>
         ))}
 
         {end < pages - 1 && (
-          <span className="flex w-8 items-center justify-center">...</span>
+          <span className="flex w-2 sm:w-8 items-center justify-center">
+            ...
+          </span>
         )}
 
         {pages > 1 && (
@@ -83,8 +89,8 @@ export const Pagination = ({ page, pages, urlParams }: PaginationProps) => {
       <Link
         href={page < pages ? getPageUrl(page + 1) : "#"}
         aria-disabled={page === pages}
-        className={`${buttonStyle} flex items-center justify-center ${
-          page === pages ? "pointer-events-none opacity-50" : ""
+        className={`${buttonStyle} flex items-center justify-center bg-white ${
+          page === pages ? " pointer-events-none opacity-50" : ""
         }`}
       >
         <span className="material-symbols material-symbols-filled text-3xl">
