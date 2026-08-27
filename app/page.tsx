@@ -3,6 +3,7 @@ import type { Category, ProductsResponse } from "./types";
 import { ProductList } from "@/components/ProductList";
 import { SearchBar } from "./components/SearchBar";
 import { Pagination } from "./components/Pagination";
+import { createUrlSearchParams } from "./lib/utils";
 
 const API_URL = "http://localhost:4000";
 const defaultLimit = "6";
@@ -32,12 +33,10 @@ export default async function Home({
     page: currentPage = "1",
     category: categorySlug = "",
     stock: stockStatus = "",
+    search = "",
   } = await searchParams;
 
-  const urlParams = new URLSearchParams();
-  urlParams.set("page", currentPage);
-  urlParams.set("category", categorySlug);
-  urlParams.set("stock", stockStatus);
+  const urlParams = createUrlSearchParams(await searchParams);
 
   const selectedCategory = categories.find(
     (category) => category.slug === categorySlug,
@@ -53,9 +52,11 @@ export default async function Home({
   if (selectedCategory) {
     query.set("categoryId", String(selectedCategory.id));
   }
-
   if (stockStatus) {
     query.set("availabilityStatus", stockStatus);
+  }
+  if (search) {
+    query.set("title_like", search);
   }
 
   const { products, total, page, pages, limit }: ProductsResponse = await fetch(
