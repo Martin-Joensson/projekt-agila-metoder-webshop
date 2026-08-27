@@ -5,6 +5,13 @@ export interface Category {
   image: string;
 }
 
+export interface Stats {
+  total: number;
+  inStock: number;
+  lowStock: number;
+  outOfStock: number;
+}
+
 export interface Product {
   id: number;
   title: string;
@@ -48,6 +55,7 @@ export interface Product {
 
 export interface ProductsResponse {
   products: Product[];
+  stats: Stats;
   total: number;
   limit: number;
   page: number;
