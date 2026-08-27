@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { Modal } from "@/components/Modal";
 import { useFormStatus } from "react-dom";
+import { redirect } from "next/navigation";
 
 export function ConfirmSubmitButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,7 +59,7 @@ export function ConfirmSubmitButton() {
 }
 
 export function CancelButton() {
-  window.location.href = "/";
+  redirect("/");
 }
 
 export default function SaveButton() {
