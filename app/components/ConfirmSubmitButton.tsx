@@ -31,7 +31,7 @@ export function ConfirmSubmitButton() {
   return (
     <>
       <button
-        className="bg-amber-500 w-fit m-auto p-2 mbs-3 rounded-xl hover:bg-amber-800 ease-in duration-200 cursor-pointer"
+        className="bg-amber-500 w-fit m-auto p-2 mbs-3 rounded-xl border-2 border-amber-500 hover:bg-white ease-in duration-100 cursor-pointer"
         type="submit"
         onClick={(event) => {
           event.preventDefault();
@@ -69,7 +69,7 @@ export function ConfirmSubmitButton() {
 export function CancelButton() {
   return (
     <Link
-      className="bg-slate-200 w-fit m-auto p-2 mbs-3 rounded-xl hover:bg-slate-300 ease-in duration-200 cursor-pointer"
+      className="bg-slate-200 w-fit m-auto p-2 mbs-3 rounded-xl border-2 border-slate-200 hover:border-slate-500 hover:bg-white ease-in duration-100 cursor-pointer"
       href="/"
     >
       Cancel
