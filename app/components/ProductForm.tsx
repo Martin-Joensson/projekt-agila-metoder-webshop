@@ -53,7 +53,6 @@ export const ProductForm = async ({ productId }: ProductFormProps) => {
       <form
         action={addProductAction}
         key={product.id}
-
         className="flex flex-col gap-4 items-start max-w-2xl w-full "
       >
         {productId !== undefined && (
@@ -108,7 +107,7 @@ export const ProductForm = async ({ productId }: ProductFormProps) => {
             />
           </div>
 
-                 <div className="flex flex-col flex-1">
+          <div className="flex flex-col flex-1">
             <label htmlFor="product-stock">Stock:</label>
             <input
               id="product-stock"
@@ -117,7 +116,7 @@ export const ProductForm = async ({ productId }: ProductFormProps) => {
               defaultValue={product.stock}
               placeholder="Enter stock"
               required
-              className="border  h-8 p-1 rounded"
+              className="border  h-8 p-1 rounded bg-neutral-50"
             />
           </div>
         </div>
