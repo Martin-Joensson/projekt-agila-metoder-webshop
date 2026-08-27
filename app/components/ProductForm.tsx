@@ -1,4 +1,4 @@
-import { AddProductAction } from "@/add-product/actions";
+import { AddProductAction } from "@/actions";
 import { Product } from "@/types";
 import {
   CancelButton,
