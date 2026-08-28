@@ -19,10 +19,13 @@ export default async function Home({
   );
 
   const stock = ["In Stock", "Low Stock", "Out of Stock"];
-  
-  const { total: totalStock, lowStock, outOfStock, inStock }: Stats = await fetch(
-    `${API_URL}/products/stats`,
-  ).then((res) => res.json());
+
+  const {
+    total: totalStock,
+    lowStock,
+    outOfStock,
+    inStock,
+  }: Stats = await fetch(`${API_URL}/products/stats`).then((res) => res.json());
 
   // we use the fetch() method to get the products from the API
   // in this fetch we sort using _sort and _order and we limit the number of products using _limit
@@ -46,6 +49,7 @@ export default async function Home({
     _limit: defaultLimit,
     _sort: "id",
     _order: "desc",
+    _expand: "category",
   });
 
   if (selectedCategory) {
